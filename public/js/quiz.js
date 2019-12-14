@@ -32,7 +32,7 @@
         choices: ["oui", "non", "pas s'il s'agit d'une poubelle à pédale"],
         correctAnswer: 0
     }, {
-        question: "Que faites-vous à coup sur lorsque votre journée de travail est terminéee ?",
+        question: "Que faites-vous à coup sur lorsque votre journée de travail est terminée ?",
         choices: ["vous jetez votre filet à cheveux à la poubelle", "vous rangez votre filet à cheveux pour le lendemain", "vous emportez votre filet à cheveux pour le lendemain"],
         correctAnswer: 0
     }, {
@@ -181,8 +181,8 @@
         }
       }
       
-      score.append('You got ' + numCorrect + ' questions out of ' +
-                   questions.length + ' right!!!');
+      score.append('Vous avez ' + numCorrect + ' bonnes réponses sur ' +
+                   questions.length + ' !');
       return score;
     }
   })();

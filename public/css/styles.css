@@ -5,20 +5,11 @@
   --slate-grey: #3c4858;
   --grey: #e5e9f2;
   --light-grey: #f9fafc;
-  --electric-blue: #2364d2;
+  --electric-blue: #4db6ac;
 }
 
 nav {
   background: var(--electric-blue);
-}
-
-:root {
-  --black-grey: #1f2d3d;
-  --steel-grey: #273444;
-  --slate-grey: #3c4858;
-  --grey: #e5e9f2;
-  --light-grey: #f9fafc;
-  --electric-blue: #2364d2;
 }
 
 body {
@@ -59,8 +50,9 @@ button {
 
 form {
   background: var(--light-grey);
-  max-width: 30rem;
+  max-width: 50rem;
   margin: auto;
+  margin-top: 3rem;
   width: 100%;
   border-radius: 10px;
   padding: 1.3rem 4rem;
