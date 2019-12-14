@@ -29,37 +29,29 @@
 
   <div class="container">
     <div class="row">
+
       <main>
-        <form method="POST" action="/">
-          <label for="e-mail" class="form-label ">
-            E-mail
-            <input name="e-mail" class="form-input" type="text" id="signup-e-mail" />
-          </label>
-          <label for="first-name" class="form-label ">
-            Nom
-            <input name="first-name" class="form-input" type="text" id="signup-first-name" />
-          </label>
-          <label for="last-name" class="form-label ">
-            Prenom
-            <input name="last-name" class="form-input" type="text" id="signup-last-name" />
-          </label>
-          <label for="password" class="form-label ">
-            Mot de passe
-            <input name="password" class="form-input" type="password" id="signup-password" />
-          </label>
+        <form name="quizForm">
+          <h3>Test indivuduel</h3>
 
-          <button type="button" id="btn-login">Suivant</button>
-
-          <p class="link">
-            Vous avez un compte ?<a href="/pages/login.html">
-              Connectez-vous</a>
-          </p>
+          <div id="quiz"></div>
+          <div id='next'><a class="waves-effect waves-light btn" href='#'>Suivant</a></div>
+          <div id='prev'><a class="waves-effect waves-light btn" href='#'>Précédent</a></div>
+          <div id='start'> <a class="waves-effect waves-light btn" href='#'>Recommencer le test</a></div>
         </form>
       </main>
     </div>
   </div>
 
-  <script src="/js/ui.js"></script>
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+  <script type="text/javascript" src='questions.json'></script>
+  <script type='text/javascript' src='/js/quiz.js'></script>
+</body>
+
+</html>
+
+<script src="/js/quiz.js"></script>
+<script src="/js/ui.js"></script>
 </body>
 
 </html>
