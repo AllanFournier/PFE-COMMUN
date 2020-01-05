@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>E Learning</title>
+  <!-- materialize icons, css & js -->
+  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet" />
+  <link type="text/css" href="/css/styles.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.json" />
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script>
+    $(function () {
+      $("#top-nav").load("/pages/top-nav.html");
+      $("#side-nav").load("/pages/side-nav.html");
+    });
+  </script>
+</head>
+
+<body class="grey lighten-4">
+  <div id="top-nav"></div>
+  <ul id="side-menu" class="sidenav side-menu">
+    <div id="side-nav"></div>
+  </ul>
+
+  <div class="container">
+    <div class="row">
+      <main>
+        <form name="quizForm">
+          
+          <!--button label="Glisse moi"
+            ondragstart="event.dataTransfer.setData('text/plain', 'Bouton à glisser');"></button>-->
+          <div id="quiz"></div>
+          <a class="waves-effect waves-light btn" id='next' href='#'>Suivant</a>
+          <a class="waves-effect waves-light btn" id='prev' href='#'>Précédent</a>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+
+  <script src="/js/rules.js"></script>
+  <script src="/js/ui.js"></script>
+</body>
+
+</html>
