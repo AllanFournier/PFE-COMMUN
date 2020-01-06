@@ -5,6 +5,21 @@
       resume: "J'applique les règles attendues avant de me rendre à mon travail"
     },
     {
+      title: "Je travail au sein d'une équipe",
+      subtitle: "Règle 7",
+      resume:
+        "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
+      question:
+        "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
+      imageChoices: [
+        "/media/29.blessure_2sparadraps-bleu.jpg",
+        "/media/29.blessure_2sparadraps-jaune.jpg"
+      ],
+      correctAnswer: 0,
+      correctResponse: "Exact",
+      incorrectResponse: "Faux"
+    },
+    {
       title: "Bienvenue dans l'entreprise Nutribel !",
       resume:
         "Prenez le temps de visualiser cette courte vidéo de présentation",
@@ -53,7 +68,7 @@
       title: "Je me rends à mon travail",
       subtitle: "Bijoux - Règle 1",
       resume: "Les bijoux constituent un danger pour la santé de vos clients",
-      imageResume: "/media/05.bijoux_dangers.jpg",
+      image: "/media/05.bijoux_dangers.jpg",
       question: "Pourquoi ?",
       radioChoices: [
         "des agents pathogénes (comme les bactéries, les virus ou les champignons) peuvent s'y cacher",
@@ -239,6 +254,20 @@
     {
       title: "Je fais une pause déjeuner",
       subtitle: "Règle 6",
+      textToComplet: [
+        "Pour commencer votre pause, il ",
+        "nécessaire de vous laver les mains.",
+        "Vous ",
+        "votre poste de travail et",
+        "l'atelier"
+      ],
+      options1: ["x", "y", "z"],
+      options2: ["a", "b", "c"],
+      options3: ["s", "m", "n"]
+    },
+    {
+      title: "Je fais une pause déjeuner",
+      subtitle: "Règle 6",
       video: "/media/27.pause2.mp4"
     },
     {
@@ -255,7 +284,7 @@
         "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
       question:
         "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
-      radioChoices: [
+      imageChoices: [
         "/media/29.blessure_2sparadraps-bleu.jpg",
         "/media/29.blessure_2sparadraps-jaune.jpg"
       ],
@@ -416,21 +445,12 @@
     $(this).removeClass("active");
   });
 
-  // Creates and returns the div that contains the questions and
-  // the answer selections
+  // Creates and returns the div that contains the questions and the answer
   function createQuestionElement(index) {
     var qElement = $("<div>", {
       id: "question"
     });
-
-    if (questions[index].audio != null) {
-      var audio = $(
-        "<audio controls preload='auto'><source src=" +
-          questions[index].audio +
-          " type='audio/mp3' /></audio>"
-      );
-      qElement.append(audio);
-    }
+    createAudio(qElement);
 
     var title = $("<h5>").append(questions[index].title + "</h5>");
     qElement.append(title);
@@ -441,9 +461,12 @@
     }
 
     var resume = $("<p>").append(questions[index].resume);
-    createImage(questions[index].imageResume, qElement, "right", 200);
     qElement.append(resume);
+
+    //createTextToComplet(qElement);
+
     createImage(questions[index].imageCenter, qElement, "center", 300);
+
     if (questions[index].imageDescription != null) {
       var des = $("<blockquote class='right'>").append(
         questions[index].imageDescription
@@ -451,35 +474,38 @@
       createImage(questions[index].imageLeft, qElement, "center", 100);
       qElement.append(des);
     }
+    createImageChoices(qElement);
+    createRadioChoices(qElement);
+    createCheckboxChoices(qElement);
+    createVideo(qElement);
+    return qElement;
+  }
 
-    if (questions[index].radioChoices != null) {
-      var question = $("<p>").append(questions[index].question);
-      qElement.append(question);
-      createImage(questions[index].image, qElement, "right", 200);
-      var radioButtons = createRadios(index);
-      qElement.append(radioButtons);
+  // Creates an Audio
+  function createAudio(qElement) {
+    if (questions[pageCounter].audio != null) {
+      var audio = $(
+        "<audio controls preload='auto'><source src=" +
+          questions[pageCounter].audio +
+          " type='audio/mp3' /></audio>"
+      );
+      qElement.append(audio);
     }
+  }
 
-    if (questions[index].checkboxChoices != null) {
-      var question = $("<p>").append(questions[index].question);
-      qElement.append(question);
-      createImage(questions[index].image, qElement, "right", 200);
-      var checkboxButtons = createCheckbox(index);
-      qElement.append(checkboxButtons);
-    }
-
-    if (questions[index].video != null) {
+  // Creates an Image
+  function createVideo(qElement) {
+    if (questions[pageCounter].video != null) {
       var video = $(
         "<video width='95%' height='35%' controls preload='none'><source src=" +
-          questions[index].video +
+          questions[pageCounter].video +
           " type='video/mp4' /></video>"
       );
       qElement.append(video);
     }
-
-    return qElement;
   }
 
+  // Creates an Image
   function createImage(image, qElement, orientation, size) {
     if (image != null) {
       var myImage = new Image(size);
@@ -487,6 +513,34 @@
       myImage.src = image;
       console.log(myImage);
       qElement.append(myImage);
+    }
+  }
+
+  function createImageChoices(qElement) {
+    if (questions[pageCounter].imageChoices != null) {
+      var question = $("<p>").append(questions[pageCounter].question);
+      qElement.append(question);
+      for (var i = 0; i < questions[pageCounter].imageChoices.length; i++) {
+        var myImage = new Image(100);
+        myImage.src = questions[pageCounter].imageChoices[i];
+        qElement.append(
+          "<input class='with-gap' type='radio' name='answer' value='" +
+            i +
+            "'><label><img src=" +
+            questions[pageCounter].imageChoices[i] +
+            "></label>"
+        );
+      }
+    }
+  }
+
+  function createRadioChoices(qElement) {
+    if (questions[pageCounter].radioChoices != null) {
+      var question = $("<p>").append(questions[pageCounter].question);
+      qElement.append(question);
+      createImage(questions[pageCounter].image, qElement, "right", 50);
+      var radioButtons = createRadios(pageCounter);
+      qElement.append(radioButtons);
     }
   }
 
@@ -507,6 +561,37 @@
       radioList.append(item);
     }
     return radioList;
+  }
+
+  // Creates a list of the answer choices as radio inputs
+  function createTextToComplet(qElement) {
+    if (questions[pageCounter].textToComplet != null) {
+      $(document).ready(function() {
+        $("select").formSelect();
+      });
+
+      var item = $('<div class="input-field col s12"><select>');
+      var input = "";
+      for (var i = 0; i < questions[pageCounter].options1.length; i++) {
+        input =
+          '<option value="">' +
+          questions[pageCounter].options1[i] +
+          "</option>";
+        item.append(input);
+      }
+      item.append("</select></div>");
+      qElement.append(item);
+    }
+  }
+
+  function createCheckboxChoices(qElement) {
+    if (questions[pageCounter].checkboxChoices != null) {
+      var question = $("<p>").append(questions[pageCounter].question);
+      qElement.append(question);
+      createImage(questions[pageCounter].image, qElement, "right", 50);
+      var checkboxButtons = createCheckbox(pageCounter);
+      qElement.append(checkboxButtons);
+    }
   }
 
   // Creates a list of the answer choices as checkbox inputs
@@ -559,6 +644,25 @@
         M.toast({ html: questions[pageCounter].incorrectResponse });
       }
     }
+
+    if (questions[pageCounter].imageChoices != null) {
+      var res = [];
+      $("input[type=radio][name='answer']")
+        .filter(":checked")
+        .each(function() {
+          res.push($(this).val());
+        });
+      if (
+        JSON.stringify(res) ==
+        JSON.stringify(questions[pageCounter].correctAnswer)
+      ) {
+        //alert('correct');
+        M.toast({ html: questions[pageCounter].correctResponse });
+      } else {
+        //alert('not correct');
+        M.toast({ html: questions[pageCounter].incorrectResponse });
+      }
+    }
     console.log(res);
   }
 
@@ -592,32 +696,4 @@
       }
     });
   }
-
-  // Computes score and returns a paragraph element to be displayed
-  /*
-  function displayScore() {
-    var score = $("<p>", { id: "question" });
-
-    var numCorrect = 0;
-    var numAnswer = 0;
-    for (var i = 0; i < questions.length; i++) {
-      if (questions[i].radioChoices != null) {
-        numAnswer++;
-      }
-    }
-    for (var i = 0; i < selections.length; i++) {
-      if (
-        questions[i].radioChoices != null &&
-        selections[i] === questions[i].correctAnswer
-      ) {
-        numCorrect++;
-      }
-    }
-
-    score.append(
-      "You got " + numCorrect + " questions out of " + numAnswer + " right!!!"
-    );
-    return score;
-  }
-  */
 })();
