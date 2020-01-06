@@ -16,7 +16,7 @@
         audio: "/media/03.arriveeTravail.mp3",
         resume: "Vous êtes presque arrivé au travail. Le bus a du retard et vous désirez vous rendre le plus rapidement possible à votre poste de travail. Vous enlevez vite votre veste, enfilez vos vêtements de travail, vous vous lavez les mains, et vous voilà prêt.",
         question: "Est-ce correct ?",
-        choices: ["Oui", "Non"],
+        radioChoices: ["Oui", "Non"],
         correctAnswer: 1,
         correctResponse: "Exact",
         incorrectResponse: "Faux",
@@ -26,8 +26,8 @@
         resume: "Les bijoux visibles sont interdits, dans une entreprise alimentaire.",
         image: "/media/04.bijoux_visibles.jpg",
         question: "Cochez les élèments auxquels cela s'applique et cliquez ensuite sur vérifiez",
-        choices: ["montre", "bague", "pince à cheveux", "boucle d'oreille", "bracelet", "pendentif", "piercing de nez", "piercing de nombril"],
-        correctAnswer: 1,
+        checkboxChoices: ["montre", "bague", "pince à cheveux", "boucle d'oreille", "bracelet", "pendentif", "piercing de nez", "piercing de nombril"],
+        correctAnswer: ["1", "2", "3", "5"],
         correctResponse: "Exact",
         incorrectResponse: "Faux",
     }, {
@@ -36,7 +36,7 @@
         resume: "Les bijoux constituent un danger pour la santé de vos clients",
         imageResume: "/media/05.bijoux_dangers.jpg",
         question: "Pourquoi ?",
-        choices: ["des agents pathogénes (comme les bactéries, les virus ou les champignons) peuvent s'y cacher", "des élèments peuvent s'en détacher et atterrir dans les denrées alimentaires"],
+        radioChoices: ["des agents pathogénes (comme les bactéries, les virus ou les champignons) peuvent s'y cacher", "des élèments peuvent s'en détacher et atterrir dans les denrées alimentaires"],
         correctAnswer: 1,
         correctResponse: "Exact",
         incorrectResponse: "Faux",
@@ -44,7 +44,7 @@
         title: "Je me rends à mon travail",
         subtitle: "Bijoux - Règle 1",
         resume: "première règle d'hygiène en vigueur chez Nutribel. Pas de Bijoux",
-        image: "/media/07.regle_1.jpg",
+        imageResume: "/media/07.regle_1.jpg",
     }, {
         title: "Leçon 2",
         resume: "J'applique les règles d'arrivée sur le lieu de travail et de bonne hygiène vestimentaire",
@@ -58,23 +58,26 @@
         subtitle: "Vêtements",
         resume: "Bien vous avez rangé veste et bijoux dans votre armoire.",
         question: "Pouvez-vous maintenant pénétrer dans l'atelier ?",
-        choices: ["Oui", "Non"],
-        correctAnswer: 1
+        radioChoices: ["Oui", "Non"],
+        correctAnswer: 1,
     }, {
-        title: "Je m'habille pour le travil",
+        title: "Je m'habille pour le travail",
         subtitle: "Vêtements - Règle 2",
         resume: "Ce qui nous mène à la seconde règle d'hygiène en vigueur chez Nutribel",
+        imageResume : "/media/11.regle_2.png",
     }, {
-        title: "Je m'habille pour le travil",
+        title: "Je m'habille pour le travail",
         subtitle: "Filets à cheveux",
         resume: "Vous observez les vestiaires et constatez que certains collègues n'ont pas bien mis leur filet à cheveux. cliquez sur eux puis sur le bouton vérifier.",
     }, {
-        title: "Je m'habille pour le travil",
+        title: "Je m'habille pour le travail",
         subtitle: "Filets à cheveux",
+        video: "/media/13.filetcheveux2.mp4",
     }, {
-        title: "Je m'habille pour le travil",
+        title: "Je m'habille pour le travail",
         subtitle: "Filets à cheveux - Règle 3",
         resume: "Et nous voici à la règle d'hygiène 3",
+        imageResume : "/media/14.regle_3.png",
     }, {
         title: "Leçon 3",
         resume: "J'applique les règles d'hygiène de l'atelier",
@@ -83,7 +86,7 @@
         subtitle: "Mains",
         resume: "Vous voici dans l'atelier. Vous avez enlevé tous vos bijoux. Vous portez vos vêtements de travail et ils sont fermés. Vos cheveux sont parfaitement recouverts.",
         question: "Pouvez vous vous mettre directement au travail",
-        choices: ["Oui", "Non"],
+        radioChoices: ["Oui", "Non"],
         correctAnswer: 1,
         correctResponse: "Exact",
         incorrectResponse: "Faux",
@@ -156,13 +159,20 @@
         qElement.append(resume);
         createImage(questions[index].imageCenter, index, qElement, "center");
 
-        if (questions[index].choices != null) {
-            isQuestion = true;
+        if (questions[index].radioChoices != null) {
             var question = $('<p>').append(questions[index].question);
             qElement.append(question);
             createImage(questions[index].image, index, qElement, "right");
             var radioButtons = createRadios(index);
             qElement.append(radioButtons);
+        }
+
+        if (questions[index].checkboxChoices != null) {
+            var question = $('<p>').append(questions[index].question);
+            qElement.append(question);
+            createImage(questions[index].image, index, qElement, "right");
+            var checkboxButtons = createCheckbox(index);
+            qElement.append(checkboxButtons);
         }
 
         if (questions[index].video != null) {
@@ -189,10 +199,10 @@
         var radioList = $('<ul>');
         var item;
         var input = '';
-        for (var i = 0; i < questions[index].choices.length; i++) {
+        for (var i = 0; i < questions[index].radioChoices.length; i++) {
             item = $('<li>');
             input = '<label><input class="with-gap" type="radio" name="answer" value=' + i + ' /><span>';
-            input += questions[index].choices[i];
+            input += questions[index].radioChoices[i];
             input += '</span></label>'
             item.append(input);
             radioList.append(item);
@@ -200,11 +210,42 @@
         return radioList;
     }
 
+    // Creates a list of the answer choices as radio inputs
+    function createCheckbox(index) {
+        var checkboxList = $('<ul>');
+        var item;
+        var input = '';
+        for (var i = 0; i < questions[index].checkboxChoices.length; i++) {
+            item = $('<li>');
+            input = '<label><input class="with-gap" type="checkbox" name="answer" value=' + i + ' /><span>';
+            input += questions[index].checkboxChoices[i];
+            input += '</span></label>'
+            item.append(input);
+            checkboxList.append(item);
+        }
+        return checkboxList;
+    }
+
     // Reads the user selection and pushes the value to an array
     function choose(pageCounter) {
-        if (questions[pageCounter].choices != null) {
+        if (questions[pageCounter].checkboxChoices != null) {
+            var res = [];
+            $("input[type=checkbox][name='answer']").filter(':checked').each(function () {
+                res.push($(this).val());
+            });
+            if (JSON.stringify(res)==JSON.stringify(questions[pageCounter].correctAnswer)) {
+                //alert('correct');
+                M.toast({ html: questions[pageCounter].correctResponse })
+            }
+            else {
+                //alert('not correct');
+                M.toast({ html: questions[pageCounter].incorrectResponse })
+            }
+        }
+
+        if (questions[pageCounter].radioChoices != null) {
             var res = +$('input[name="answer"]:checked').val();
-            if (res === questions[pageCounter].correctAnswer) {
+            if (res === questions[pageCounter].correctAnswer)  {
                 //alert('correct');
                 M.toast({ html: questions[pageCounter].correctResponse })
             }
@@ -225,10 +266,10 @@
                 quiz.append(nextQuestion).fadeIn();
                 console.log(pageCounter);
 
-                
+
                 //$('input[value=' + selections[pageCounter] + ']').prop('checked', true);
-                if (questions[pageCounter].choices != null) {
-                    console.log(questions[pageCounter].choices);
+                if (questions[pageCounter].radioChoices != null) {
+                    console.log(questions[pageCounter].radioChoices);
                 }
 
                 // Controls display of 'prev' button
@@ -256,12 +297,12 @@
         var numCorrect = 0;
         var numAnswer = 0;
         for (var i = 0; i < questions.length; i++) {
-            if (questions[i].choices != null) {
+            if (questions[i].radioChoices != null) {
                 numAnswer++;
             }
         }
         for (var i = 0; i < selections.length; i++) {
-            if (questions[i].choices != null && selections[i] === questions[i].correctAnswer) {
+            if (questions[i].radioChoices != null && selections[i] === questions[i].correctAnswer) {
                 numCorrect++;
             }
         }
