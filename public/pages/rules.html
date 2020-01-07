@@ -15,6 +15,7 @@
     <link rel="manifest" href="/manifest.json" />
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    
     <script>
       $(function() {
         $("#top-nav").load("/pages/top-nav.html");
@@ -23,18 +24,18 @@
     </script>
   </head>
 
+
+
   <body class="grey lighten-4">
     <div id="top-nav"></div>
-    <ul id="side-menu" claclass="right"">
+    <ul id="side-menu" class="sidenav side-menu">
+        <div id="side-nav"></div>
+      </ul>
       <div class="row">
         <main>
           <form name="quizForm">
 
-            <!--button label="Glisse moi"
-            ondragstart="event.dataTransfer.setData('text/plain', 'Bouton à glisser');"></button>-->
-
             <div id="quiz"></div>
-
             <a class="waves-effect waves-light btn" id="prev" href="#"
               >Précédent</a
             >
