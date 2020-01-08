@@ -37,6 +37,7 @@ function isUserSignedIn() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
   if (user) { // User is signed in!
+    console.log("updating UI");
     // Get the signed-in user's profile pic and name.
     var profilePicUrl = getProfilePicUrl();
     var userName = getUserName();
@@ -57,14 +58,33 @@ function authStateObserver(user) {
     //saveMessagingDeviceToken();
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
-    userNameElement.setAttribute('hidden', 'true');
-    userPicElement.setAttribute('hidden', 'true');
+    userNameElement.style.display= 'none';
+    userPicElement.setAttribute('hidden');
     signOutButtonElement.setAttribute('hidden', 'true');
 
     // Show sign-in button.
     signInButtonElement.removeAttribute('hidden');
   }
 }
+
+function setupUI (user){
+  if (user) {
+    const loggedOutLinks = document.querySelectorAll('.logged-out');
+    const loggedInLinks = document.querySelectorAll('.logged-in');
+    // account info
+    // toggle user UI elements
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+  } else {
+    // clear account info
+    accountDetails.innerHTML = '';
+    // toggle user elements
+    adminItems.forEach(item => item.style.display = 'none');
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+  }
+};
+
 
 // Adds a size to Google Profile pics URLs.
 function addSizeToGoogleProfilePic(url) {
