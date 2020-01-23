@@ -29,11 +29,16 @@ function getUserName() {
   return firebase.auth().currentUser.displayName;
 }
 
+// Returns the signed-in user's email.
+function getUserEmail() {
+  return firebase.auth().currentUser.email;
+}
+
 // Returns true if a user is signed-in.
 function isUserSignedIn() {
   return !!firebase.auth().currentUser;
 }
-
+/*
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
   if (user) { // User is signed in!
@@ -66,8 +71,48 @@ function authStateObserver(user) {
     signInButtonElement.removeAttribute('hidden');
   }
 }
+*/
 
-function setupUI (user){
+// Triggers when the auth state change for instance when the user signs-in or signs-out.
+function authStateObserver(user) {
+  if (user) { // User is signed in!
+    console.log(user);
+    console.log("updating UI");
+    // Get the signed-in user's profile pic and name.
+    var profilePicUrl = getProfilePicUrl();
+    var userName = getUserName();
+    var email = getUserEmail();
+
+    // Set the user's profile pic and name.
+    //userPicElement.src = 'url(' + addSizeToGoogleProfilePic(profilePicUrl) + ')';
+    if (userPicElement != null) {
+      if(logInElem!=null){
+      userNameElement.style.display = 'block';
+      userEmailElement.style.display = 'block';
+      logOutElem.style.display = 'block';
+      logInElem.style.display = 'none';
+      userPicElement.style.display = 'block';
+      }
+      userPicElement.src = profilePicUrl;
+      userNameElement.textContent = userName;
+      userEmailElement.textContent = email;
+    }
+
+    // We save the Firebase Messaging Device token and enable notifications.
+    //saveMessagingDeviceToken();
+  } else { // User is signed out!
+    // Hide user's profile and sign-out button.
+    if(logInElem!=null){
+    logInElem.style.display = 'block';
+    logOutElem.style.display = 'none';
+    userNameElement.style.display = 'none';
+    userEmailElement.style.display = 'none';
+    userPicElement.style.display = 'none';
+    }
+  }
+}
+
+function setupUI(user) {
   if (user) {
     const loggedOutLinks = document.querySelectorAll('.logged-out');
     const loggedInLinks = document.querySelectorAll('.logged-in');
@@ -98,8 +143,8 @@ function addSizeToGoogleProfilePic(url) {
 function checkSetup() {
   if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
     window.alert('You have not configured and imported the Firebase SDK. ' +
-        'Make sure you go through the codelab setup instructions and make ' +
-        'sure you are running the codelab using `firebase serve`');
+      'Make sure you go through the codelab setup instructions and make ' +
+      'sure you are running the codelab using `firebase serve`');
   }
 }
 
@@ -114,16 +159,24 @@ var submitButtonElement = document.getElementById('submit');
 var imageButtonElement = document.getElementById('submitImage');
 var imageFormElement = document.getElementById('image-form');
 var mediaCaptureElement = document.getElementById('mediaCapture');
-var userPicElement = document.getElementById('user-pic');
-var userNameElement = document.getElementById('user-name');
-var signInButtonElement = document.getElementById('sign-in');
-var signOutButtonElement = document.getElementById('sign-out');
+var userPicElement = document.getElementById('user-menu-pic');
+var userNameElement = document.getElementById('user-menu-name');
+var userEmailElement = document.getElementById('user-menu-email')
+
+var signInButtonElementG = document.getElementById('btn-googlein');
+var logOutElem = document.getElementById('logoutli');
+var logInElem = document.getElementById('loginli');
+var signOutButtonElement = document.getElementById('logout');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
+if (signInButtonElementG) {
+  signInButtonElementG.addEventListener('click', signIn);
+}
 
-signOutButtonElement.addEventListener('click', signOut);
-signInButtonElement.addEventListener('click', signIn);
-
+var signOutButtonMenu = document.getElementById('logout');
+if (signOutButtonMenu) {
+  signOutButtonMenu.addEventListener('click', signOut);
+}
 // initialize Firebase
 initFirebaseAuth();
 

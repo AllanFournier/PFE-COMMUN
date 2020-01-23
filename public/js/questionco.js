@@ -6,37 +6,6 @@ var hideUn = document.getElementById("hideOne");
 var hideTwo = document.getElementById("hideTwo");
 var hideThree = document.getElementById("hideThree");
 
-var signTest = document.getElementById('signT');
-signTest.addEventListener('click', signTesting);
-
-var upTe = document.getElementById('upT');
-upTe.addEventListener('click', userUpdate);
-
-function signTesting() {
-  var email = "toto@gmail.com";
-  var password = "toto59";
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-  });
-}
-
-function userUpdate() {
-  console.log("up")
-  var user = firebase.auth().currentUser;
-
-  user.updateProfile({
-    displayName: "Jane",
-    photoURL: "https://fakeimg.pl/350x200/ff0000/000"
-  }).then(function () {
-    // Update successful.
-  }).catch(function (error) {
-    // An error happened.
-  });
-
-}
-
 choiceOne.addEventListener('click', sendOne);
 choiceTwo.addEventListener('click', sendTwo);
 choiceThree.addEventListener('click', sendThree);
