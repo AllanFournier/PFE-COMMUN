@@ -5,21 +5,6 @@
       resume: "J'applique les règles attendues avant de me rendre à mon travail"
     },
     {
-      title: "Je travail au sein d'une équipe",
-      subtitle: "Règle 7",
-      resume:
-        "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
-      question:
-        "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
-      imageChoices: [
-        "/media/29.blessure_2sparadraps-bleu.jpg",
-        "/media/29.blessure_2sparadraps-jaune.jpg"
-      ],
-      correctAnswer: 0,
-      correctResponse: "Exact",
-      incorrectResponse: "Faux"
-    },
-    {
       title: "Bienvenue dans l'entreprise Nutribel !",
       resume:
         "Prenez le temps de visualiser cette courte vidéo de présentation",
@@ -485,7 +470,7 @@
   function createAudio(qElement) {
     if (questions[pageCounter].audio != null) {
       var audio = $(
-        "<audio controls preload='auto'><source src=" +
+        "<audio controls autoplay><source src=" +
           questions[pageCounter].audio +
           " type='audio/mp3' /></audio>"
       );
@@ -497,7 +482,7 @@
   function createVideo(qElement) {
     if (questions[pageCounter].video != null) {
       var video = $(
-        "<video width='95%' height='35%' controls preload='none'><source src=" +
+        "<video width='95%' height='35%' controls autoplay><source src=" +
           questions[pageCounter].video +
           " type='video/mp4' /></video>"
       );
