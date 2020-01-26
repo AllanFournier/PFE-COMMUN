@@ -239,20 +239,6 @@
     {
       title: "Je fais une pause déjeuner",
       subtitle: "Règle 6",
-      textToComplet: [
-        "Pour commencer votre pause, il ",
-        "nécessaire de vous laver les mains.",
-        "Vous ",
-        "votre poste de travail et",
-        "l'atelier"
-      ],
-      options1: ["x", "y", "z"],
-      options2: ["a", "b", "c"],
-      options3: ["s", "m", "n"]
-    },
-    {
-      title: "Je fais une pause déjeuner",
-      subtitle: "Règle 6",
       video: "/media/27.pause2.mp4"
     },
     {
@@ -261,21 +247,6 @@
       resume: "Ce qui nous amène à la régle d'hygiène n°6 :",
       imageLeft: "/media/28.regle_6.png",
       imageDescription: "Ne pas manger, boire ou fumer"
-    },
-    {
-      title: "Je travail au sein d'une équipe",
-      subtitle: "Règle 7",
-      resume:
-        "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
-      question:
-        "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
-      imageChoices: [
-        "/media/29.blessure_2sparadraps-bleu.jpg",
-        "/media/29.blessure_2sparadraps-jaune.jpg"
-      ],
-      correctAnswer: 0,
-      correctResponse: "Exact",
-      incorrectResponse: "Faux"
     },
     {
       title:
@@ -356,7 +327,7 @@
     {
       title: "Je fais face à une situation inattendue",
       subtitle: "Règle 9",
-      resume: "Nous en déduisons la régle d'hygiène n°9 :",
+      resume: "Nous en déduisons la régle d'hygiène n°9:",
       imageLeft: "/media/37.regle_9.png",
       imageDescription: "Empêchez les animaux nuisibles et insectes d'entrer"
     },
