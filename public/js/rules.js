@@ -1,8 +1,24 @@
-(function () {
+(function() {
   var questions = [
     {
       title: "Leçon 1",
-      resume: "J'applique les 10 règles d'hygiène à la personne dans le secteur de l'industrie alimentaire"
+      resume:
+        "J'applique les 10 règles d'hygiène à la personne dans le secteur de l'industrie alimentaire"
+    },
+    {
+      title: "Je travail au sein d'une équipe",
+      subtitle: "Règle 7",
+      resume:
+        "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
+      question:
+        "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
+      imageChoices: [
+        "/media/29.blessure_2sparadraps-bleu.jpg",
+        "/media/29.blessure_2sparadraps-jaune.jpg"
+      ],
+      correctAnswer: 0,
+      correctResponse: "Exact",
+      incorrectResponse: "Faux"
     },
     {
       title: "J'arrive sur mon lieu de travail",
@@ -378,7 +394,7 @@
   displayNext();
 
   // Click handler for the 'next' button
-  $("#next").on("click", function (e) {
+  $("#next").on("click", function(e) {
     e.preventDefault();
     // Suspend click listener during fade animation
     if (quiz.is(":animated")) {
@@ -390,7 +406,7 @@
   });
 
   // Click handler for the 'prev' button
-  $("#prev").on("click", function (e) {
+  $("#prev").on("click", function(e) {
     e.preventDefault();
     if (quiz.is(":animated")) {
       return false;
@@ -401,10 +417,10 @@
   });
 
   // Animates buttons on hover
-  $(".button").on("mouseenter", function () {
+  $(".button").on("mouseenter", function() {
     $(this).addClass("active");
   });
-  $(".button").on("mouseleave", function () {
+  $(".button").on("mouseleave", function() {
     $(this).removeClass("active");
   });
 
@@ -450,8 +466,8 @@
     if (questions[pageCounter].audio != null) {
       var audio = $(
         "<audio controls autoplay><source src=" +
-        questions[pageCounter].audio +
-        " type='audio/mp3' /></audio>"
+          questions[pageCounter].audio +
+          " type='audio/mp3' /></audio>"
       );
       qElement.append(audio);
     }
@@ -462,8 +478,8 @@
     if (questions[pageCounter].video != null) {
       var video = $(
         "<video width='95%' height='35%' controls autoplay><source src=" +
-        questions[pageCounter].video +
-        " type='video/mp4' /></video>"
+          questions[pageCounter].video +
+          " type='video/mp4' /></video>"
       );
       qElement.append(video);
     }
@@ -489,10 +505,10 @@
         myImage.src = questions[pageCounter].imageChoices[i];
         qElement.append(
           "<input class='with-gap' type='radio' name='answer' value='" +
-          i +
-          "'><label><img src=" +
-          questions[pageCounter].imageChoices[i] +
-          "></label>"
+            i +
+            "'><label><img src=" +
+            questions[pageCounter].imageChoices[i] +
+            "></label>"
         );
       }
     }
@@ -509,12 +525,17 @@
   }
 
   function imageToSelect(qElement) {
-
     if (questions[pageCounter].imageToSelect != null) {
       console.log(questions[pageCounter].imageToSelect);
-      image = "<img src='" + questions[pageCounter].imageToSelect + "' width='145' height='126' alt='Planets' usemap='#planetmap'>";
+      image =
+        "<img src='" +
+        questions[pageCounter].imageToSelect +
+        "' width='450' height='252' alt='Planets' usemap='#planetmap'>";
       image +=
-        "<map name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='" + questions[pageCounter].imageToSelect + "'></map>";
+        "<map name='planetmap'><area shape='rect' coords='220,50,260,200' alt='Sun' href='" +
+        questions[pageCounter].imageToSelect +
+        "'> </map>";
+
       qElement.append(image);
     }
   }
@@ -541,7 +562,7 @@
   // Creates a list of the answer choices as radio inputs
   function createTextToComplet(qElement) {
     if (questions[pageCounter].textToComplet != null) {
-      $(document).ready(function () {
+      $(document).ready(function() {
         $("select").formSelect();
       });
 
@@ -594,7 +615,7 @@
       var res = [];
       $("input[type=checkbox][name='answer']")
         .filter(":checked")
-        .each(function () {
+        .each(function() {
           res.push($(this).val());
         });
       if (
@@ -624,7 +645,7 @@
       var res = [];
       $("input[type=radio][name='answer']")
         .filter(":checked")
-        .each(function () {
+        .each(function() {
           res.push($(this).val());
         });
       if (
@@ -643,7 +664,7 @@
 
   // Displays next requested element
   function displayNext() {
-    quiz.fadeOut(function () {
+    quiz.fadeOut(function() {
       $("#question").remove();
       if (pageCounter < questions.length) {
         var nextQuestion = createQuestionElement(pageCounter);
