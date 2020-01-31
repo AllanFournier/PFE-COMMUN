@@ -1,8 +1,15 @@
-(function() {
+(function () {
   var questions = [
     {
       title: "Leçon 1",
-      resume: "J'applique les règles attendues avant de me rendre à mon travail"
+      resume: "J'applique les 10 règles d'hygiène à la personne dans le secteur de l'industrie alimentaire"
+    },
+    {
+      title: "J'arrive sur mon lieu de travail",
+      subtitle: "Règle 2",
+      resume:
+        "Vous voilà arrivé chez Nutribel. Voici le plan de l'entreprise. Où vous rendez-vous en premier lieu ? Cliquez sur l'endroit approprié dans le schéma.",
+      imageToSelect: "/media/08.arriveeNutribel.png"
     },
     {
       title: "Bienvenue dans l'entreprise Nutribel !",
@@ -12,12 +19,12 @@
     },
     {
       title: "Je me rends à mon travail",
-      subtitle: "Parfum, maquillage",
+      subtitle: "Règle 1",
       video: "/media/02.bus_femme.mp4"
     },
     {
       title: "Je me rends à mon travail",
-      subtitle: "Parfum, maquillage",
+      subtitle: "Règle 1",
       audio: "/media/03.arriveeTravail.mp3",
       resume:
         "Vous êtes presque arrivé au travail. Le bus a du retard et vous désirez vous rendre le plus rapidement possible à votre poste de travail. Vous enlevez vite votre veste, enfilez vos vêtements de travail, vous vous lavez les mains, et vous voilà prêt.",
@@ -29,7 +36,7 @@
     },
     {
       title: "Je me rends à mon travail",
-      subtitle: "Bijoux - Règle 1",
+      subtitle: "Règle 1",
       resume:
         "Les bijoux visibles sont interdits, dans une entreprise alimentaire.",
       image: "/media/04.bijoux_visibles.jpg",
@@ -51,7 +58,7 @@
     },
     {
       title: "Je me rends à mon travail",
-      subtitle: "Bijoux - Règle 1",
+      subtitle: "Règle 1",
       resume: "Les bijoux constituent un danger pour la santé de vos clients",
       image: "/media/05.bijoux_dangers.jpg",
       question: "Pourquoi ?",
@@ -65,12 +72,12 @@
     },
     {
       title: "Je me rends à mon travail",
-      subtitle: "Bijoux - Règle 1",
+      subtitle: "Règle 1",
       video: "/media/06.bijoux_doigt.mp4"
     },
     {
       title: "Je me rends à mon travail",
-      subtitle: "Bijoux - Règle 1",
+      subtitle: "Règle 1",
       resume: "première règle d'hygiène en vigueur chez Nutribel:",
       imageLeft: "/media/07.regle_1.jpg",
       imageDescription: "Pas de Bijoux"
@@ -82,14 +89,14 @@
     },
     {
       title: "J'arrive sur mon lieu de travail",
-      subtitle: "Vêtements - Règle 2",
+      subtitle: "Règle 2",
       resume:
         "Vous voilà arrivé chez Nutribel. Voici le plan de l'entreprise. Où vous rendez-vous en premier lieu ? Cliquez sur l'endroit approprié dans le schéma.",
-      imageCenter: "/media/08.arriveeNutribel.png"
+      imageToSelect: "/media/08.arriveeNutribel.png"
     },
     {
       title: "J'arrive sur mon lieu de travail",
-      subtitle: "Vêtements - Règle 2",
+      subtitle: "Règle 2",
       resume: "Bien vous avez rangé veste et bijoux dans votre armoire.",
       question: "Pouvez-vous maintenant pénétrer dans l'atelier ?",
       radioChoices: ["Oui", "Non"],
@@ -99,7 +106,7 @@
     },
     {
       title: "Je m'habille pour le travail",
-      subtitle: "Vêtements - Règle 2",
+      subtitle: "Règle 2",
       question:
         "Pouvez-vous porter un pull chaud par-dessus vos vêtements de travail ?",
       radioChoices: ["Oui", "Non"],
@@ -109,7 +116,7 @@
     },
     {
       title: "Je m'habille pour le travail",
-      subtitle: "Vêtements - Règle 2",
+      subtitle: "Règle 2",
       resume:
         "Ce qui nous mène à la seconde règle d'hygiène en vigueur chez Nutribel:",
       imageLeft: "/media/11.regle_2.png",
@@ -117,18 +124,18 @@
     },
     {
       title: "Je m'habille pour le travail",
-      subtitle: "Filets à cheveux - Règle 3",
+      subtitle: "Règle 3",
       resume:
         "Vous observez les vestiaires et constatez que certains collègues n'ont pas bien mis leur filet à cheveux. cliquez sur eux puis sur le bouton vérifier."
     },
     {
       title: "Je m'habille pour le travail",
-      subtitle: "Filets à cheveux - Règle 3",
+      subtitle: "Règle 3",
       video: "/media/13.filetcheveux2.mp4"
     },
     {
       title: "Je m'habille pour le travail",
-      subtitle: "Filets à cheveux - Règle 3",
+      subtitle: "Règle 3",
       resume: "Et nous voici à la règle d'hygiène N°3",
       imageLeft: "/media/14.regle_3.png",
       imageDescription: "Aucun cheveu visible"
@@ -140,7 +147,7 @@
     {
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
-      subtitle: "Mains - Règle 4",
+      subtitle: "Règle 4",
       resume:
         "Vous voici dans l'atelier. Vous avez enlevé tous vos bijoux. Vous portez vos vêtements de travail et ils sont fermés. Vos cheveux sont parfaitement recouverts.",
       question: "Pouvez vous vous mettre directement au travail",
@@ -152,7 +159,7 @@
     {
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
-      subtitle: "Mains - Règle 4",
+      subtitle: "Règle 4",
       resume:
         "Comment obtenir dix doigts propres en 10 étapes ? Cliquez sur l'image pour visualiser la vidéo puis continuer en cliquant sur le bouton suivant",
       imageCenter: "/media/16.10doigtspropres_doigt1-propre.png"
@@ -173,7 +180,7 @@
     {
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
-      subtitle: "Mains - Règle 4",
+      subtitle: "Règle 4",
       resume: "Voici donc la règle d'hygiène n°4 :",
       imageLeft: "/media/19.regles_4.png",
       imageDescription: "10 doigts propres"
@@ -371,7 +378,7 @@
   displayNext();
 
   // Click handler for the 'next' button
-  $("#next").on("click", function(e) {
+  $("#next").on("click", function (e) {
     e.preventDefault();
     // Suspend click listener during fade animation
     if (quiz.is(":animated")) {
@@ -383,7 +390,7 @@
   });
 
   // Click handler for the 'prev' button
-  $("#prev").on("click", function(e) {
+  $("#prev").on("click", function (e) {
     e.preventDefault();
     if (quiz.is(":animated")) {
       return false;
@@ -394,10 +401,10 @@
   });
 
   // Animates buttons on hover
-  $(".button").on("mouseenter", function() {
+  $(".button").on("mouseenter", function () {
     $(this).addClass("active");
   });
-  $(".button").on("mouseleave", function() {
+  $(".button").on("mouseleave", function () {
     $(this).removeClass("active");
   });
 
@@ -430,6 +437,7 @@
       createImage(questions[index].imageLeft, qElement, "center", 100);
       qElement.append(des);
     }
+    imageToSelect(qElement);
     createImageChoices(qElement);
     createRadioChoices(qElement);
     createCheckboxChoices(qElement);
@@ -442,8 +450,8 @@
     if (questions[pageCounter].audio != null) {
       var audio = $(
         "<audio controls autoplay><source src=" +
-          questions[pageCounter].audio +
-          " type='audio/mp3' /></audio>"
+        questions[pageCounter].audio +
+        " type='audio/mp3' /></audio>"
       );
       qElement.append(audio);
     }
@@ -454,8 +462,8 @@
     if (questions[pageCounter].video != null) {
       var video = $(
         "<video width='95%' height='35%' controls autoplay><source src=" +
-          questions[pageCounter].video +
-          " type='video/mp4' /></video>"
+        questions[pageCounter].video +
+        " type='video/mp4' /></video>"
       );
       qElement.append(video);
     }
@@ -481,10 +489,10 @@
         myImage.src = questions[pageCounter].imageChoices[i];
         qElement.append(
           "<input class='with-gap' type='radio' name='answer' value='" +
-            i +
-            "'><label><img src=" +
-            questions[pageCounter].imageChoices[i] +
-            "></label>"
+          i +
+          "'><label><img src=" +
+          questions[pageCounter].imageChoices[i] +
+          "></label>"
         );
       }
     }
@@ -497,6 +505,17 @@
       createImage(questions[pageCounter].image, qElement, "right", 50);
       var radioButtons = createRadios(pageCounter);
       qElement.append(radioButtons);
+    }
+  }
+
+  function imageToSelect(qElement) {
+
+    if (questions[pageCounter].imageToSelect != null) {
+      console.log(questions[pageCounter].imageToSelect);
+      image = "<img src='" + questions[pageCounter].imageToSelect + "' width='145' height='126' alt='Planets' usemap='#planetmap'>";
+      image +=
+        "<map name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='" + questions[pageCounter].imageToSelect + "'></map>";
+      qElement.append(image);
     }
   }
 
@@ -522,7 +541,7 @@
   // Creates a list of the answer choices as radio inputs
   function createTextToComplet(qElement) {
     if (questions[pageCounter].textToComplet != null) {
-      $(document).ready(function() {
+      $(document).ready(function () {
         $("select").formSelect();
       });
 
@@ -575,7 +594,7 @@
       var res = [];
       $("input[type=checkbox][name='answer']")
         .filter(":checked")
-        .each(function() {
+        .each(function () {
           res.push($(this).val());
         });
       if (
@@ -605,7 +624,7 @@
       var res = [];
       $("input[type=radio][name='answer']")
         .filter(":checked")
-        .each(function() {
+        .each(function () {
           res.push($(this).val());
         });
       if (
@@ -624,7 +643,7 @@
 
   // Displays next requested element
   function displayNext() {
-    quiz.fadeOut(function() {
+    quiz.fadeOut(function () {
       $("#question").remove();
       if (pageCounter < questions.length) {
         var nextQuestion = createQuestionElement(pageCounter);
