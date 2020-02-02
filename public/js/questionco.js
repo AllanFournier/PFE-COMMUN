@@ -79,6 +79,7 @@ var questions = [
 ];
 
 var questionCounter = 0;
+var nextOk = false;
 
 var currquestion = document.getElementById("currquestion");
 var ansOne = document.getElementById("ans0");
@@ -105,14 +106,14 @@ prevq.addEventListener('click', prevOne);
 
 function nextOne() {
   console.log("next one");
-  if (questionCounter < 9) {
+  if (questionCounter < 9 && nextOk) {
     questionCounter += 1;
     currquestion.innerHTML = questions[questionCounter].question;
     ansOne.innerHTML = questions[questionCounter].choices[0];
     ansTwo.innerHTML = questions[questionCounter].choices[1];
     ansThree.innerHTML = questions[questionCounter].choices[2];
   }
-
+  
 }
 
 function prevOne() {
@@ -124,6 +125,7 @@ function prevOne() {
     ansTwo.innerHTML = questions[questionCounter].choices[1];
     ansThree.innerHTML = questions[questionCounter].choices[2];
   }
+  
 }
 
 function sendOne() {
@@ -143,31 +145,70 @@ function sendThree() {
 
 function updateNames() {
   console.log("up");
-  console.log(choixQuestion["nomA"]);
-  console.log(choixQuestion["nomB"]);
-  console.log(choixQuestion["nomC"]);
+  //console.log(choixQuestion["nomA"]);
+  //console.log(choixQuestion["nomB"]);
+  //console.log(choixQuestion["nomC"]);
+  var cptA = choixQuestion["counterA"];
+  var cptB = choixQuestion["counterB"];
+  var cptC = choixQuestion["counterC"];
+  console.log(cptA);
+  console.log(cptB);
+  console.log(cptC);
   hideUn.innerHTML = choixQuestion["nomA"];
   hideTwo.innerHTML = choixQuestion["nomB"];
   hideThree.innerHTML = choixQuestion["nomC"];
+  if( (cptA == 2) || (cptB == 2 ) || (cptC == 2) ){
+      nextOk =  true;
+  } else {
+    nextOk = false;
+  }
   resetNames();
 }
 
 function resetNames() {
   choixQuestion["nomA"] = "";
+  choixQuestion["counterA"] = 0;
   choixQuestion["nomB"] = "";
+  choixQuestion["counterB"] = 0;
   choixQuestion["nomC"] = "";
+  choixQuestion["counterC"] = 0;
 }
 
 let choixQuestion = {
   nomA: "",
+  counterA: 0,
   nomB: "",
-  nomC: ""
+  counterB: 0,
+  nomC: "",
+  counterC: 0,
 };
 
-function updateChoice(choixU) {
+function updateChoiceOld(choixU) {
 
   if (isUserSignedIn()) {
     var refCh = firebase.firestore().collection("session").doc(firebase.auth().currentUser.uid);
+
+    return refCh.set({
+      name: getUserName(),
+      choix: choixU,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  } else {
+    console.log("You must be logged");
+  }
+
+}
+function updateChoice(choixU) {
+
+  if (isUserSignedIn()) {
+    var refCh = firebase.firestore().collection("group").doc("10").collection("choix").doc(firebase.auth().currentUser.uid);
 
     return refCh.set({
       name: getUserName(),
@@ -200,7 +241,7 @@ function loadChoice() {
     snapshot.forEach(function (doc) {
       var choixAutre = doc.data().choix;
       console.log(choixAutre);
-      var nomAutre = doc.data().name;
+      var nomAutre = doc.data().nom;
       console.log(nomAutre);
       if (choixAutre === "C") {
         if (!choixQuestion.nomC.includes(nomAutre))
@@ -218,4 +259,36 @@ function loadChoice() {
 
 }
 
-loadChoice();
+function loadChoiceGroup() {
+  // Create the query to load the last 12 messages and listen for new ones.
+  var query = firebase.firestore().collection("group").doc("10").collection("choix");
+
+  query.onSnapshot(function (snapshot) {
+    snapshot.forEach(function (doc) {
+      var choixAutre = doc.data().choix;
+      console.log(choixAutre);
+      var nomAutre = doc.data().name;
+      console.log(nomAutre);
+      if (choixAutre === "C") {
+        if (!choixQuestion.nomC.includes(nomAutre))
+          choixQuestion["nomC"] += " " + nomAutre;
+        choixQuestion["counterC"] += 1;
+      } else if (choixAutre === "B") {
+        if (!choixQuestion.nomB.includes(nomAutre))
+          choixQuestion["nomB"] += " " + nomAutre;
+        choixQuestion["counterB"] += 1;
+      } else if (choixAutre === "A") {
+        if (!choixQuestion.nomA.includes(nomAutre))
+          choixQuestion["nomA"] += " " + nomAutre;
+        choixQuestion["counterA"] += 1;
+      }
+    });
+    updateNames();
+  });
+
+  // Start listening to the query.
+
+}
+
+loadChoiceGroup();
+//loadChoice();
