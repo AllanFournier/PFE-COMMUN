@@ -16,6 +16,8 @@ logBtn.addEventListener("click", e => {
     console.log("signin");
     console.log(cred);
     console.log("apres cred");
+    document.location.href ="/index.html";
     loginForm.reset();
   });
 });
+
