@@ -30,25 +30,25 @@
   <div class="container">
     <div class="row">
       <main>
-        <form method="POST" action="/">
+        <form id="signup-form" method="POST" action="/">
           <label for="e-mail" class="form-label ">
             E-mail
-            <input name="e-mail" class="form-input" type="text" id="signup-e-mail" />
+            <input name="e-mail" class="form-input" type="text" id="signup-email" />
           </label>
           <label for="first-name" class="form-label ">
             Nom
-            <input name="first-name" class="form-input" type="text" id="signup-first-name" />
+            <input name="first-name" class="form-input" type="text" id="signup-firstname" />
           </label>
           <label for="last-name" class="form-label ">
             Prenom
-            <input name="last-name" class="form-input" type="text" id="signup-last-name" />
+            <input name="last-name" class="form-input" type="text" id="signup-lastname" />
           </label>
           <label for="password" class="form-label ">
             Mot de passe
             <input name="password" class="form-input" type="password" id="signup-password" />
           </label>
 
-          <button type="button" id="btn-login">Suivant</button>
+          <button type="button" id="btn-signup">S'inscrire</button>
 
           <p class="link">
             Vous avez un compte ?<a href="/pages/login.html">
@@ -58,8 +58,12 @@
       </main>
     </div>
   </div>
+  <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+  <script src="/__/firebase/7.6.1/firebase-auth.js"></script>
+  <script src="/__/firebase/init.js"></script>
 
   <script src="/js/ui.js"></script>
+  <script src="/js/signup.js"></script>
 </body>
 
 </html>
