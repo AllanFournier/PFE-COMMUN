@@ -72,7 +72,7 @@
     {
       title: "Je me rends à mon travail",
       subtitle: "Règle 1",
-      resume: "première règle d'hygiène en vigueur chez Nutribel:",
+      resume: "Première règle d'hygiène en vigueur chez Nutribel:",
       imageLeft: "/media/07.regle_1.jpg",
       imageDescription: "Pas de Bijoux"
     },
@@ -526,13 +526,26 @@
 
     //createTextToComplet(qElement);
 
-    createImage(questions[index].imageCenter, qElement, "center", 300);
+    createImageOrientation(
+      questions[index].imageCenter,
+      qElement,
+      "center",
+      300
+    );
 
     if (questions[index].imageDescription != null) {
       var des = $("<blockquote class='right'>").append(
         questions[index].imageDescription
       );
-      createImage(questions[index].imageLeft, qElement, "center", 100);
+      createImageOrientation(
+        questions[index].imageLeft,
+        qElement,
+        "center",
+        150
+      );
+      //createImage(questions[index].imageLeft, qElement, 150);
+      console.log("monnnnnnnn Image");
+      console.log(questions[index].imageLeft);
       qElement.append(des);
     }
 
@@ -570,7 +583,7 @@
   }
 
   // Creates an Image
-  function createImage(image, qElement, orientation, size) {
+  function createImageOrientation(image, qElement, orientation, size) {
     if (image != null) {
       var myImage = new Image(size);
       myImage.align = orientation;
@@ -632,7 +645,12 @@
     if (questions[pageCounter].radioChoices != null) {
       var question = $("<p>").append(questions[pageCounter].question);
       qElement.append(question);
-      createImage(questions[pageCounter].image, qElement, "right", 50);
+      createImageOrientation(
+        questions[pageCounter].image,
+        qElement,
+        "right",
+        50
+      );
       var radioButtons = createRadios(pageCounter);
       qElement.append(radioButtons);
     }
@@ -698,7 +716,12 @@
     if (questions[pageCounter].checkboxChoices != null) {
       var question = $("<p>").append(questions[pageCounter].question);
       qElement.append(question);
-      createImage(questions[pageCounter].image, qElement, "right", 50);
+      createImageOrientation(
+        questions[pageCounter].image,
+        qElement,
+        "right",
+        50
+      );
       var checkboxButtons = createCheckbox(pageCounter);
       qElement.append(checkboxButtons);
     }
