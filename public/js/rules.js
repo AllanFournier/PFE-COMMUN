@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var questions = [
     {
       title: "Leçon 1",
@@ -441,7 +441,7 @@
   }
 
   // Click handler for the 'next' button
-  $("#next").on("click", function(e) {
+  $("#next").on("click", function (e) {
     e.preventDefault();
     // Suspend click listener during fade animation
     if (quiz.is(":animated")) {
@@ -484,12 +484,12 @@
     return map;
   }
 
-  $("#valid").on("click", function(e) {
+  $("#valid").on("click", function (e) {
     var res = [];
 
     $("input[type=radio][name='valid']")
       .filter(":checked")
-      .each(function() {
+      .each(function () {
         res.push($(this).val());
       });
     console.log("rrrrrrrrrrrr");
@@ -514,7 +514,7 @@
   });
 
   // Click handler for the 'prev' button
-  $("#prev").on("click", function(e) {
+  $("#prev").on("click", function (e) {
     e.preventDefault();
     if (quiz.is(":animated")) {
       return false;
@@ -525,10 +525,10 @@
   });
 
   // Animates buttons on hover
-  $(".button").on("mouseenter", function() {
+  $(".button").on("mouseenter", function () {
     $(this).addClass("active");
   });
-  $(".button").on("mouseleave", function() {
+  $(".button").on("mouseleave", function () {
     $(this).removeClass("active");
   });
 
@@ -587,13 +587,13 @@
   // Creates an Audio
   function createAudio(qElement) {
     if (questions[pageCounter].audio != null) {
-      //var audio = new Audio(questions[pageCounter].audio);
-      //audio.play();
-      var audio = $(
-        "<audio autoplay><source src=" +
-          questions[pageCounter].audio +
-          " type='audio/mp3' /></audio>"
-      );
+      var audio = new Audio(questions[pageCounter].audio);
+      audio.play();
+      //var audio = $(
+      //  "<audio autoplay><source src=" +
+      //    questions[pageCounter].audio +
+      //    " type='audio/mp3' /></audio>"
+      //);
       qElement.append(audio);
     }
   }
@@ -603,8 +603,8 @@
     if (questions[pageCounter].video != null) {
       var video = $(
         "<video width='95%' height='35%' controls autoplay><source src=" +
-          questions[pageCounter].video +
-          " type='video/mp4' /></video>"
+        questions[pageCounter].video +
+        " type='video/mp4' /></video>"
       );
       qElement.append(video);
     }
@@ -634,40 +634,67 @@
   function createImageRes(qElement) {
     if (questions[pageCounter].imageResumeDescription != null) {
       var i = 0;
+      var radioList = $("<ul>");
       questions[pageCounter].imageResume.forEach(element => {
-        createImage(element, qElement, 100);
         var des = $(
-          "<label><input class='with-gap' type='radio' name='valid' id='valid' value='Règle " +
-            (i + 1) +
-            "' ><span>" +
-            questions[pageCounter].imageResumeDescription[i] +
-            "</span></label>"
+          "<li><label><input class='with-gap' type='radio' name='valid' id='valid' value='Règle " +
+          (i + 1) +
+          "' ><span>" +
+          questions[pageCounter].imageResumeDescription[i] +
+          "</span></label>"
         );
+        createImage(element, qElement, 100);
 
         i++;
 
-        qElement.append(des);
+        radioList.append(des);
+
+        qElement.append(radioList);
       });
     }
+  }
+
+  function changeimg(url, e) {
+
+    let nodes = document.getElementById("thumb_img");
+    let img_child = nodes.children;
+    console.log(img_child);
+    for (i = 0; i < img_child.length; i++) {
+      img_child[i].classList.remove('active');
+      console.log(img_child[i]);
+    }
+    e.classList.add('active');
+    console.log(e);
+
   }
 
   function createImageChoices(qElement) {
     if (questions[pageCounter].imageChoices != null) {
       var question = $("<p>").append(questions[pageCounter].question);
       qElement.append(question);
-      for (var i = 0; i < questions[pageCounter].imageChoices.length; i++) {
-        var myImage = new Image(100);
-        myImage.src = questions[pageCounter].imageChoices[i];
-        qElement.append(
-          "<input class='with-gap' type='radio' name='answer' value='" +
-            i +
-            "'><label><img src=" +
-            questions[pageCounter].imageChoices[i] +
-            "></label>"
-        );
-      }
+      var res = $("<p>");
+      questions[pageCounter].imageChoices.forEach(element => {
+        res.append(
+          '<div id="content">' +
+          '<div id="thumb_img" class="cf">' +
+          '<img class="active" src="' +
+          element +
+          '" ' +
+          'onclick="' +
+          'checkImgSelected(' +
+          "'" +
+          questions[pageCounter].correctAnswer + "'," +
+          "'" +
+          element + "'" +
+          ',this);">' +
+          '</div>' +
+          '</div>');
+      });
     }
+    qElement.append(res);
   }
+
+
 
   function createRadioChoices(qElement) {
     if (questions[pageCounter].radioChoices != null) {
@@ -690,11 +717,9 @@
       image =
         "<img src='" +
         questions[pageCounter].imageToSelect +
-        "' width='450' height='252' alt='Planets' usemap='#planetmap'>";
+        "' width='450' height='252' alt='Nutribel' usemap='#nutribelmap'>";
       image +=
-        "<map name='planetmap'><area shape='rect' coords='220,50,260,200' alt='Sun' href='" +
-        questions[pageCounter].imageToSelect +
-        "'> </map>";
+        "<map name='nutribelmap'><area shape='rect' coords='220,50,260,200' alt='nutribelVestiaire' href=''>  </map>";
 
       qElement.append(image);
     }
@@ -722,7 +747,7 @@
   // Creates a list of the answer choices as radio inputs
   function createTextToComplet(qElement) {
     if (questions[pageCounter].textToComplet != null) {
-      $(document).ready(function() {
+      $(document).ready(function () {
         $("select").formSelect();
       });
 
@@ -748,7 +773,7 @@
         questions[pageCounter].image,
         qElement,
         "right",
-        50
+        150
       );
       var checkboxButtons = createCheckbox(pageCounter);
       qElement.append(checkboxButtons);
@@ -780,7 +805,7 @@
       var res = [];
       $("input[type=checkbox][name='answer']")
         .filter(":checked")
-        .each(function() {
+        .each(function () {
           res.push($(this).val());
         });
       if (
@@ -810,7 +835,7 @@
       var res = [];
       $("input[type=radio][name='answer']")
         .filter(":checked")
-        .each(function() {
+        .each(function () {
           res.push($(this).val());
         });
       if (
@@ -827,9 +852,19 @@
     console.log(res);
   }
 
+
+  function changeImage() {
+    var image = document.getElementById('myImage');
+    if (image.src.match("bulbon")) {
+      image.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+    } else {
+      image.src = "https://www.w3schools.com/js/pic_bulbon.gif";
+    }
+  }
+
   // Displays next requested element
   function displayNext(showMe) {
-    quiz.fadeOut(function() {
+    quiz.fadeOut(function () {
       $("#question").remove();
       if (pageCounter < questions.length) {
         var nextQuestion = createQuestionElement(pageCounter);
