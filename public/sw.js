@@ -92,8 +92,8 @@ async function handleActivation() {
 async function clearCaches() {
   var cacheNames = await caches.keys();
   var oldCacheNames = cacheNames.filter(function matchOldCache(cacheName) {
-    if (/^ramblings-\d+$/.test(cacheName)) {
-      let [, cacheVersion] = cacheName.match(/^ramblings-(\d+)$/);
+    if (/^elearning-\d+$/.test(cacheName)) {
+      let [, cacheVersion] = cacheName.match(/^elearning-(\d+)$/);
       cacheVersion = cacheVersion != null ? Number(cacheVersion) : cacheVersion;
       return cacheVersion > 0 && cacheVersion != version;
     }

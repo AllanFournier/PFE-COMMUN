@@ -6,28 +6,6 @@
         "J'applique les 10 règles d'hygiène à la personne dans le secteur de l'industrie alimentaire"
     },
     {
-      title: "Je travail au sein d'une équipe",
-      subtitle: "Règle 7",
-      resume:
-        "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
-      question:
-        "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
-      imageChoices: [
-        "/media/29.blessure_2sparadraps-bleu.jpg",
-        "/media/29.blessure_2sparadraps-jaune.jpg"
-      ],
-      correctAnswer: 0,
-      correctResponse: "Exact",
-      incorrectResponse: "Faux"
-    },
-    {
-      title: "J'arrive sur mon lieu de travail",
-      subtitle: "Règle 2",
-      resume:
-        "Vous voilà arrivé chez Nutribel. Voici le plan de l'entreprise. Où vous rendez-vous en premier lieu ? Cliquez sur l'endroit approprié dans le schéma.",
-      imageToSelect: "/media/08.arriveeNutribel.png"
-    },
-    {
       title: "Bienvenue dans l'entreprise Nutribel !",
       resume:
         "Prenez le temps de visualiser cette courte vidéo de présentation",
@@ -94,7 +72,7 @@
     {
       title: "Je me rends à mon travail",
       subtitle: "Règle 1",
-      resume: "première règle d'hygiène en vigueur chez Nutribel:",
+      resume: "Première règle d'hygiène en vigueur chez Nutribel:",
       imageLeft: "/media/07.regle_1.jpg",
       imageDescription: "Pas de Bijoux"
     },
@@ -272,6 +250,21 @@
       imageDescription: "Ne pas manger, boire ou fumer"
     },
     {
+      title: "Je travail au sein d'une équipe",
+      subtitle: "Règle 7",
+      resume:
+        "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
+      question:
+        "Elle a une petite blessure à la main : son chat l'a griffé. Il faut y appliquer un sparadrap. Lequel lui conseillez-vous ?",
+      imageChoices: [
+        "/media/29.blessure_2sparadraps-bleu.jpg",
+        "/media/29.blessure_2sparadraps-jaune.jpg"
+      ],
+      correctAnswer: 0,
+      correctResponse: "Exact",
+      incorrectResponse: "Faux"
+    },
+    {
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 7",
@@ -383,15 +376,43 @@
     {
       title: "Les 10 règles de l'hygiène",
       resume:
-        "Si vous désirez revoir une règle, cliquez dessus. Vous pouvez imprimer une carte aide mémoire en cliquant sur le bouton imprimer"
+        "Si vous désirez revoir une règle, cliquez dessus. Vous pouvez imprimer une carte aide mémoire en cliquant sur le bouton imprimer",
+      imageResume: [
+        "/media/07.regle_1.jpg",
+        "/media/11.regle_2.png",
+        "/media/14.regle_3.png",
+        "/media/19.regles_4.png",
+        "/media/24.regle_5.png",
+        "/media/28.regle_6.png",
+        "/media/32.regle_7.png",
+        "/media/35.regle_8.png",
+        "/media/37.regle_9.png",
+        "/media/39.regle_10.png"
+      ],
+      imageResumeDescription: [
+        "Pas de Bijoux",
+        "Porter des vêtements de travail fermés",
+        "Aucun cheveu visible",
+        "10 doigts propres",
+        "Lavez-vous les mains lorsque vous vous grattez ou éternuez",
+        "Ne pas manger, boire ou fumer",
+        "Couvrez toute blessure et signalez toute maladie",
+        "Lavez-vous les mains après tout passage aux toilettes et après tout autre travail",
+        "Empêchez les animaux nuisibles et insectes d'entrer",
+        "Ne laissez aucune chance aux micro-organismes"
+      ]
     }
   ];
 
-  var pageCounter = 0;
+  var pageCounter = current;
   var quiz = $("#quiz"); //Quiz div object
 
   // Display initial question
-  displayNext();
+  if (pageCounter === 41) {
+    displayNext(1);
+  } else {
+    displayNext(0);
+  }
 
   // Click handler for the 'next' button
   $("#next").on("click", function(e) {
@@ -402,7 +423,68 @@
     }
     choose(pageCounter);
     pageCounter++;
-    displayNext();
+    displayNext(0);
+  });
+
+  function create_map_rule() {
+    var pagesNum = 0;
+    var pagesNumArray = [];
+    var map = {};
+    var names = [
+      "Règle 1",
+      "Règle 2",
+      "Règle 3",
+      "Règle 4",
+      "Règle 5",
+      "Règle 6",
+      "Règle 7",
+      "Règle 8",
+      "Règle 9",
+      "Règle 10"
+    ];
+    questions.forEach(element => {
+      names.forEach(elementNames => {
+        if (
+          element.subtitle === elementNames &&
+          map[elementNames] === undefined
+        ) {
+          map[elementNames] = pagesNum;
+          pagesNumArray.push(pagesNum);
+        }
+      });
+
+      pagesNum++;
+    });
+    return map;
+  }
+
+  $("#valid").on("click", function(e) {
+    var res = [];
+
+    $("input[type=radio][name='valid']")
+      .filter(":checked")
+      .each(function() {
+        res.push($(this).val());
+      });
+    console.log("rrrrrrrrrrrr");
+    console.log(res);
+    e.preventDefault();
+    if (quiz.is(":animated")) {
+      return false;
+    }
+    var m = create_map_rule();
+    var values = [];
+    for (var key in m) {
+      if (m.hasOwnProperty(key)) {
+        values.push(m[key]);
+        if (res == key) {
+          pageCounter = m[key];
+          displayNext(1);
+        }
+      }
+    }
+    console.log(pageCounter);
+    console.log(m);
   });
 
   // Click handler for the 'prev' button
@@ -413,7 +495,7 @@
     }
     choose(pageCounter);
     pageCounter--;
-    displayNext();
+    displayNext(0);
   });
 
   // Animates buttons on hover
@@ -444,15 +526,30 @@
 
     //createTextToComplet(qElement);
 
-    createImage(questions[index].imageCenter, qElement, "center", 300);
+    createImageOrientation(
+      questions[index].imageCenter,
+      qElement,
+      "center",
+      300
+    );
 
     if (questions[index].imageDescription != null) {
       var des = $("<blockquote class='right'>").append(
         questions[index].imageDescription
       );
-      createImage(questions[index].imageLeft, qElement, "center", 100);
+      createImageOrientation(
+        questions[index].imageLeft,
+        qElement,
+        "center",
+        150
+      );
+      //createImage(questions[index].imageLeft, qElement, 150);
+      console.log("monnnnnnnn Image");
+      console.log(questions[index].imageLeft);
       qElement.append(des);
     }
+
+    createImageRes(qElement);
     imageToSelect(qElement);
     createImageChoices(qElement);
     createRadioChoices(qElement);
@@ -486,13 +583,43 @@
   }
 
   // Creates an Image
-  function createImage(image, qElement, orientation, size) {
+  function createImageOrientation(image, qElement, orientation, size) {
     if (image != null) {
       var myImage = new Image(size);
       myImage.align = orientation;
       myImage.src = image;
       console.log(myImage);
       qElement.append(myImage);
+    }
+  }
+
+  // Creates an Image
+  function createImage(image, qElement, size) {
+    if (image != null) {
+      var myImage = new Image(size);
+      myImage.src = image;
+      console.log(myImage);
+      qElement.append(myImage);
+    }
+  }
+
+  function createImageRes(qElement) {
+    if (questions[pageCounter].imageResumeDescription != null) {
+      var i = 0;
+      questions[pageCounter].imageResume.forEach(element => {
+        createImage(element, qElement, 100);
+        var des = $(
+          "<label><input class='with-gap' type='radio' name='valid' id='valid' value='Règle " +
+            (i + 1) +
+            "' ><span>" +
+            questions[pageCounter].imageResumeDescription[i] +
+            "</span></label>"
+        );
+
+        i++;
+
+        qElement.append(des);
+      });
     }
   }
 
@@ -518,7 +645,12 @@
     if (questions[pageCounter].radioChoices != null) {
       var question = $("<p>").append(questions[pageCounter].question);
       qElement.append(question);
-      createImage(questions[pageCounter].image, qElement, "right", 50);
+      createImageOrientation(
+        questions[pageCounter].image,
+        qElement,
+        "right",
+        50
+      );
       var radioButtons = createRadios(pageCounter);
       qElement.append(radioButtons);
     }
@@ -584,7 +716,12 @@
     if (questions[pageCounter].checkboxChoices != null) {
       var question = $("<p>").append(questions[pageCounter].question);
       qElement.append(question);
-      createImage(questions[pageCounter].image, qElement, "right", 50);
+      createImageOrientation(
+        questions[pageCounter].image,
+        qElement,
+        "right",
+        50
+      );
       var checkboxButtons = createCheckbox(pageCounter);
       qElement.append(checkboxButtons);
     }
@@ -663,7 +800,7 @@
   }
 
   // Displays next requested element
-  function displayNext() {
+  function displayNext(showMe) {
     quiz.fadeOut(function() {
       $("#question").remove();
       if (pageCounter < questions.length) {
@@ -676,19 +813,35 @@
           console.log(questions[pageCounter].radioChoices);
         }
 
+        console.log(showMe);
+        console.log(pageCounter);
+
         // Controls display of 'prev' button
         if (pageCounter === 1) {
           $("#prev").show();
+          $("#valid").hide();
+          console.log("ici1");
         } else if (pageCounter === 0) {
           $("#prev").hide();
           $("#next").show();
+          $("#valid").hide();
+          console.log("ici2");
+        } else if (pageCounter === 41 && showMe === 0) {
+          $("#valid").show();
+          $("#prev").hide();
+          $("#next").hide();
+          console.log("ici3"); //supppp
+        } else if (pageCounter === 41 && showMe === 1) {
+          $("#valid").hide();
+          $("#prev").hide();
+          $("#next").hide();
+          console.log("ici4");
+        } else {
+          $("#valid").hide();
+          $("#prev").show();
+          $("#next").show();
+          console.log("ici5");
         }
-      } else {
-        //var scoreElem = displayScore();
-        //quiz.append(scoreElem).fadeIn();
-        $("#next").hide();
-        $("#prev").hide();
-        //$("#start").show();
       }
     });
   }
