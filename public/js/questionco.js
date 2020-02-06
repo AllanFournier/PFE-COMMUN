@@ -79,8 +79,8 @@ var questions = [
 ];
 
 var questionCounter = 0;
-var nextOk = false;
 
+var numquestion = document.getElementById("number-question");
 var currquestion = document.getElementById("currquestion");
 var ansOne = document.getElementById("ans0");
 var ansTwo = document.getElementById("ans1");
@@ -106,26 +106,28 @@ prevq.addEventListener('click', prevOne);
 
 function nextOne() {
   console.log("next one");
-  if (questionCounter < 9 && nextOk) {
+  if (questionCounter < 9) {
     questionCounter += 1;
+    numquestion.innerHTML = questionCounter;
     currquestion.innerHTML = questions[questionCounter].question;
     ansOne.innerHTML = questions[questionCounter].choices[0];
     ansTwo.innerHTML = questions[questionCounter].choices[1];
     ansThree.innerHTML = questions[questionCounter].choices[2];
   }
-  
+
 }
 
 function prevOne() {
   console.log("prev one");
   if (questionCounter > 0) {
     questionCounter -= 1;
+    numquestion.innerHTML = questionCounter;
     currquestion.innerHTML = questions[questionCounter].question;
     ansOne.innerHTML = questions[questionCounter].choices[0];
     ansTwo.innerHTML = questions[questionCounter].choices[1];
     ansThree.innerHTML = questions[questionCounter].choices[2];
   }
-  
+
 }
 
 function sendOne() {
@@ -148,20 +150,9 @@ function updateNames() {
   //console.log(choixQuestion["nomA"]);
   //console.log(choixQuestion["nomB"]);
   //console.log(choixQuestion["nomC"]);
-  var cptA = choixQuestion["counterA"];
-  var cptB = choixQuestion["counterB"];
-  var cptC = choixQuestion["counterC"];
-  console.log(cptA);
-  console.log(cptB);
-  console.log(cptC);
   hideUn.innerHTML = choixQuestion["nomA"];
   hideTwo.innerHTML = choixQuestion["nomB"];
   hideThree.innerHTML = choixQuestion["nomC"];
-  if( (cptA == 2) || (cptB == 2 ) || (cptC == 2) ){
-      nextOk =  true;
-  } else {
-    nextOk = false;
-  }
   resetNames();
 }
 
@@ -223,7 +214,7 @@ function updateChoice(choixU) {
         console.error("Error updating document: ", error);
       });
   } else {
-    console.log("You must be logged");
+    alert("Connectez vou s.v.p");
   }
 
 }
@@ -234,7 +225,7 @@ function loadChoice() {
   var query = firebase.firestore()
     .collection('session')
     .orderBy('timestamp', 'desc')
-    .limit(4);
+    .limit(5);
 
   // Start listening to the query.
   query.onSnapshot(function (snapshot) {
@@ -261,32 +252,34 @@ function loadChoice() {
 
 function loadChoiceGroup() {
   // Create the query to load the last 12 messages and listen for new ones.
-  var query = firebase.firestore().collection("group").doc("10").collection("choix");
+  if (isUserSignedIn()) {
+    var query = firebase.firestore().collection("group").doc("10").collection("choix");
 
-  query.onSnapshot(function (snapshot) {
-    snapshot.forEach(function (doc) {
-      var choixAutre = doc.data().choix;
-      console.log(choixAutre);
-      var nomAutre = doc.data().name;
-      console.log(nomAutre);
-      if (choixAutre === "C") {
-        if (!choixQuestion.nomC.includes(nomAutre))
-          choixQuestion["nomC"] += " " + nomAutre;
-        choixQuestion["counterC"] += 1;
-      } else if (choixAutre === "B") {
-        if (!choixQuestion.nomB.includes(nomAutre))
-          choixQuestion["nomB"] += " " + nomAutre;
-        choixQuestion["counterB"] += 1;
-      } else if (choixAutre === "A") {
-        if (!choixQuestion.nomA.includes(nomAutre))
-          choixQuestion["nomA"] += " " + nomAutre;
-        choixQuestion["counterA"] += 1;
-      }
+    query.onSnapshot(function (snapshot) {
+      snapshot.forEach(function (doc) {
+        var choixAutre = doc.data().choix;
+        console.log(choixAutre);
+        var nomAutre = doc.data().name;
+        console.log(nomAutre);
+        if (choixAutre === "C") {
+          if (!choixQuestion.nomC.includes(nomAutre))
+            choixQuestion["nomC"] += " " + nomAutre;
+          choixQuestion["counterC"] += 1;
+        } else if (choixAutre === "B") {
+          if (!choixQuestion.nomB.includes(nomAutre))
+            choixQuestion["nomB"] += " " + nomAutre;
+          choixQuestion["counterB"] += 1;
+        } else if (choixAutre === "A") {
+          if (!choixQuestion.nomA.includes(nomAutre))
+            choixQuestion["nomA"] += " " + nomAutre;
+          choixQuestion["counterA"] += 1;
+        }
+      });
+      updateNames();
     });
-    updateNames();
-  });
-
-  // Start listening to the query.
+  } else {
+    alert("Connectez vous s.v.p");
+  }
 
 }
 
