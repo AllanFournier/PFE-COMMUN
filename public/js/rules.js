@@ -31,6 +31,7 @@
     {
       title: "Je me rends à mon travail",
       subtitle: "Règle 1",
+      audio: "/media/04.bijoux_visibles.mp3",
       resume:
         "Les bijoux visibles sont interdits, dans une entreprise alimentaire.",
       image: "/media/04.bijoux_visibles.jpg",
@@ -53,6 +54,7 @@
     {
       title: "Je me rends à mon travail",
       subtitle: "Règle 1",
+      audio: "/media/05.bijoux_dangers.mp3",
       resume: "Les bijoux constituent un danger pour la santé de vos clients",
       image: "/media/05.bijoux_dangers.jpg",
       question: "Pourquoi ?",
@@ -72,6 +74,7 @@
     {
       title: "Je me rends à mon travail",
       subtitle: "Règle 1",
+      audio: "/media/07.regle_1.mp3",
       resume: "Première règle d'hygiène en vigueur chez Nutribel:",
       imageLeft: "/media/07.regle_1.jpg",
       imageDescription: "Pas de Bijoux"
@@ -84,6 +87,7 @@
     {
       title: "J'arrive sur mon lieu de travail",
       subtitle: "Règle 2",
+      audio: "/media/08.arriveeNutribel.mp3",
       resume:
         "Vous voilà arrivé chez Nutribel. Voici le plan de l'entreprise. Où vous rendez-vous en premier lieu ? Cliquez sur l'endroit approprié dans le schéma.",
       imageToSelect: "/media/08.arriveeNutribel.png"
@@ -91,6 +95,7 @@
     {
       title: "J'arrive sur mon lieu de travail",
       subtitle: "Règle 2",
+      audio: "/media/09.vetements.mp3",
       resume: "Bien vous avez rangé veste et bijoux dans votre armoire.",
       question: "Pouvez-vous maintenant pénétrer dans l'atelier ?",
       radioChoices: ["Oui", "Non"],
@@ -101,6 +106,7 @@
     {
       title: "Je m'habille pour le travail",
       subtitle: "Règle 2",
+      audio: "/media/10.vetements2.mp3",
       question:
         "Pouvez-vous porter un pull chaud par-dessus vos vêtements de travail ?",
       radioChoices: ["Oui", "Non"],
@@ -111,6 +117,7 @@
     {
       title: "Je m'habille pour le travail",
       subtitle: "Règle 2",
+      audio: "/media/11.regle_2.mp3",
       resume:
         "Ce qui nous mène à la seconde règle d'hygiène en vigueur chez Nutribel:",
       imageLeft: "/media/11.regle_2.png",
@@ -119,6 +126,7 @@
     {
       title: "Je m'habille pour le travail",
       subtitle: "Règle 3",
+      audio: "/media/12.filetcheveux.mp3",
       resume:
         "Vous observez les vestiaires et constatez que certains collègues n'ont pas bien mis leur filet à cheveux. cliquez sur eux puis sur le bouton vérifier."
     },
@@ -130,6 +138,7 @@
     {
       title: "Je m'habille pour le travail",
       subtitle: "Règle 3",
+      audio: "/media/14.regle_3.mp3",
       resume: "Et nous voici à la règle d'hygiène N°3",
       imageLeft: "/media/14.regle_3.png",
       imageDescription: "Aucun cheveu visible"
@@ -142,6 +151,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 4",
+      audio: "/media/15.arriveeatelier.mp3",
       resume:
         "Vous voici dans l'atelier. Vous avez enlevé tous vos bijoux. Vous portez vos vêtements de travail et ils sont fermés. Vos cheveux sont parfaitement recouverts.",
       question: "Pouvez vous vous mettre directement au travail",
@@ -161,7 +171,8 @@
     {
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
-      subtitle: "Mains - Règle 4",
+      subtitle: "Règle 4",
+      audio: "/media/18.mains2.mp3",
       resume:
         "Vous devez vous rincer abondamment les mains aptès les avoir lavées.",
       question:
@@ -175,6 +186,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 4",
+      audio: "/media/19.regles_4.mp3",
       resume: "Voici donc la règle d'hygiène n°4 :",
       imageLeft: "/media/19.regles_4.png",
       imageDescription: "10 doigts propres"
@@ -183,6 +195,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 5",
+      audio: "/media/20.demangeaisons.mp3",
       resume:
         "Après les avoir lavées et rincées, vous vous séchez les mains à l'aide de papier jetable.",
       question: "Une serviette conviendrait-elle aussi ?",
@@ -195,6 +208,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 5",
+      audio: "/media/21.demangeaisons2.mp3",
       resume:
         "Vous voilà maintenant à votre poste de travail. Votre nez commence à vous démanger.",
       question: "Vous vous grattez un peu et vous vous remettez au travail ?",
@@ -213,6 +227,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 5",
+      audio: "/media/22.demangeaisons3.mp3",
       resume:
         "Votre collègue est allergique aux fleurs et doit fréquemment éternuer.",
       question:
@@ -245,6 +260,7 @@
     {
       title: "Je fais une pause déjeuner",
       subtitle: "Règle 6",
+      audio: "/media/28.regle_6.mp3",
       resume: "Ce qui nous amène à la régle d'hygiène n°6 :",
       imageLeft: "/media/28.regle_6.png",
       imageDescription: "Ne pas manger, boire ou fumer"
@@ -252,6 +268,7 @@
     {
       title: "Je travail au sein d'une équipe",
       subtitle: "Règle 7",
+      audio: "/media/29.blessure.mp3",
       resume:
         "Au cours de la pause, vous discutez avec Caroline qui commence le travail.",
       question:
@@ -268,6 +285,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 7",
+      audio: "/media/30.blessure2.mp3",
       question:
         "Caroline doit-elle se laver les mains avant d'appliquer le pansement et de mettre des gants ?",
       radioChoices: ["oui", "non"],
@@ -285,6 +303,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 7",
+      audio: "/media/32.regle_7.mp3",
       resume: "Et voici la règle d'hygiène n°7 :",
       imageLeft: "/media/32.regle_7.png",
       imageDescription: "Couvrez toute blessure et signalez toute maladie"
@@ -292,6 +311,7 @@
     {
       title: "J'évolue dans mon environnement de travail",
       subtitle: "Règle 8",
+      audio: "/media/33.autrestravaux.mp3",
       resume:
         "Vous êtes au tavail depuis quelques heures, et avez travaillé de façon propre et ordonnée : vous avez immédiatement jeté dans le container approprié les objets inutiles tels que les emballages ; vous avez immédiatement nettoyé toute salissure. Maintenant, vous devez aller d'urgence aux toilettes.",
       question:
@@ -304,6 +324,7 @@
     {
       title: "J'évolue dans mon environnement de travail",
       subtitle: "Règle 8",
+      audio: "/media/34.autrestravaux2.mp3",
       resume: "Vous devez évacuer quelques déchets.",
       question: "Devez-vous vous laver les mains par la suite ?",
       radioChoices: ["oui", "non"],
@@ -314,6 +335,7 @@
     {
       title: "J'évolue dans mon environnement de travail",
       subtitle: "Règle 8",
+      audio: "/media/35.regle_8.mp3",
       resume: "Voici donc la règle d'hygiène n°8 :",
       imageLeft: "/media/35.regle_8.png",
       imageDescription:
@@ -322,6 +344,7 @@
     {
       title: "Je fais face à une situation inattendue",
       subtitle: "Règle 9",
+      audio: "/media/36.insectes.mp3",
       resume:
         "Une machine de l'atelier doit être réparée. Le technicien arrive.",
       question: "Que doit-il absolument faire ?",
@@ -343,6 +366,7 @@
     {
       title: "Je fais face à une situation inattendue",
       subtitle: "Règle 9",
+      audio: "/media/37.regle_9.mp3",
       resume: "Nous en déduisons la régle d'hygiène n°9:",
       imageLeft: "/media/37.regle_9.png",
       imageDescription: "Empêchez les animaux nuisibles et insectes d'entrer"
@@ -350,6 +374,7 @@
     {
       title: "Je quitte mon lieu de travail",
       subtitle: "Règle 10",
+      audio: "/media/38.finjournee.mp3",
       resume:
         "Vous n'avez pas vu passer la journée. Le travail est terminé. Vous pouvez rentrer à la maison.",
       question: "Que faites-vous ?",
@@ -369,6 +394,7 @@
     {
       title: "Je quitte mon lieu de travail",
       subtitle: "Règle 10",
+      audio: "/media/39.regle_10.mp3",
       resume: "Nous voici arrivés à la dernière régle d'hygiène :",
       imageLeft: "/media/39.regle_10.png",
       imageDescription: "Ne laissez aucune chance aux micro-organismes"
@@ -561,8 +587,10 @@
   // Creates an Audio
   function createAudio(qElement) {
     if (questions[pageCounter].audio != null) {
+      //var audio = new Audio(questions[pageCounter].audio);
+      //audio.play();
       var audio = $(
-        "<audio controls autoplay><source src=" +
+        "<audio autoplay><source src=" +
           questions[pageCounter].audio +
           " type='audio/mp3' /></audio>"
       );
