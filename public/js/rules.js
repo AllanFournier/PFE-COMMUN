@@ -176,6 +176,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 4",
+      audio: "/media/16.10doigtspropres.mp3",
       resume:
         "Comment obtenir dix doigts propres en 10 étapes ? Cliquez sur l'image pour visualiser la vidéo puis continuer en cliquant sur le bouton suivant",
       imageToSelect: "/media/16.10doigtspropres_doigt1-propre.png",
@@ -185,9 +186,9 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 4",
-      audio: "/media/18.mains2.mp3",
+      audio: "/media/17.mains.mp3",
       resume:
-        "Vous devez vous rincer abondamment les mains aptès les avoir lavées.",
+        "Vous devez vous rincer abondamment les mains après les avoir lavées.",
       question:
         "Les restes de savon constituent en effet un danger pour vos produits et vos clients. De quel ordre ?",
       radioChoices: ["(micro)-biologique", "physique", "chimique"],
@@ -208,7 +209,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 5",
-      audio: "/media/20.demangeaisons.mp3",
+      audio: "/media/18.mains2.mp3",
       resume:
         "Après les avoir lavées et rincées, vous vous séchez les mains à l'aide de papier jetable.",
       question: "Une serviette conviendrait-elle aussi ?",
@@ -221,7 +222,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 5",
-      audio: "/media/21.demangeaisons2.mp3",
+      audio: "/media/20.demangeaisons.mp3",
       resume:
         "Vous voilà maintenant à votre poste de travail. Votre nez commence à vous démanger.",
       question: "Vous vous grattez un peu et vous vous remettez au travail ?",
@@ -260,6 +261,7 @@
       title:
         "Je respecte les règles d'hygiène de l'atelier et en connait les raisons",
       subtitle: "Règle 5",
+      audio: "/media/24.regle_5.mp3",
       resume: "La règle d'hygiène n°5 est donc la suivante :",
       imageLeft: "/media/24.regle_5.png",
       imageDescription:
@@ -357,7 +359,7 @@
     {
       title: "Je fais face à une situation inattendue",
       subtitle: "Règle 9",
-      audio: "/media/36.insectes.mp3",
+      audio: "/media/25.visiteurs.mp3",
       resume:
         "Une machine de l'atelier doit être réparée. Le technicien arrive.",
       question: "Que doit-il absolument faire ?",
@@ -416,6 +418,7 @@
       title: "Les 10 règles de l'hygiène",
       resume:
         "Si vous désirez revoir une règle, cliquez dessus. Vous pouvez imprimer une carte aide mémoire en cliquant sur le bouton imprimer",
+      audio: "/media/40.synthese.mp3",
       imageResume: [
         "/media/07.regle_1.jpg",
         "/media/11.regle_2.png",
@@ -627,7 +630,7 @@
       var myImage = new Image(size);
       myImage.align = orientation;
       myImage.src = image;
-      console.log(myImage);
+      //console.log(myImage);
       qElement.append(myImage);
     }
   }
@@ -637,7 +640,7 @@
     if (image != null) {
       var myImage = new Image(size);
       myImage.src = image;
-      console.log(myImage);
+      //console.log(myImage);
       qElement.append(myImage);
     }
   }
@@ -669,13 +672,13 @@
 
     let nodes = document.getElementById("thumb_img");
     let img_child = nodes.children;
-    console.log(img_child);
+    //console.log(img_child);
     for (i = 0; i < img_child.length; i++) {
       img_child[i].classList.remove('active');
-      console.log(img_child[i]);
+      //console.log(img_child[i]);
     }
     e.classList.add('active');
-    console.log(e);
+    //console.log(e);
 
   }
 
@@ -722,7 +725,7 @@
 
   function imageToSelect(qElement) {
     if (questions[pageCounter].imageToSelect != null) {
-      console.log(questions[pageCounter].imageToSelect);
+      //console.log(questions[pageCounter].imageToSelect);
       image =
         "<img src='" +
         questions[pageCounter].imageToSelect +
