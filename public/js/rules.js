@@ -90,7 +90,8 @@
       audio: "/media/08.arriveeNutribel.mp3",
       resume:
         "Vous voilà arrivé chez Nutribel. Voici le plan de l'entreprise. Où vous rendez-vous en premier lieu ? Cliquez sur l'endroit approprié dans le schéma.",
-      imageToSelect: "/media/08.arriveeNutribel.png"
+      imageToSelect: "/media/08.arriveeNutribel.png",
+      videoClick: "#"
     },
     {
       title: "J'arrive sur mon lieu de travail",
@@ -127,8 +128,19 @@
       title: "Je m'habille pour le travail",
       subtitle: "Règle 3",
       audio: "/media/12.filetcheveux.mp3",
+      imageChoices: ["/media/12.filetcheveux(0).png",
+                    "/media/12.filetcheveux(1).png",
+                    "/media/12.filetcheveux(2).png",
+                    "/media/12.filetcheveux(3).png",
+                    "/media/12.filetcheveux(4).png",
+                    "/media/12.filetcheveux(5).png",
+                    "/media/12.filetcheveux(6).png",
+                    "/media/12.filetcheveux(7).png",
+                    "/media/12.filetcheveux(8).png",
+                    "/media/12.filetcheveux(9).png"],
       resume:
-        "Vous observez les vestiaires et constatez que certains collègues n'ont pas bien mis leur filet à cheveux. cliquez sur eux puis sur le bouton vérifier."
+        "Vous observez les vestiaires et constatez que certains collègues n'ont pas bien mis leur filet à cheveux. cliquez sur eux.",
+      correctAnswer: "/media/12.filetcheveux(1).png",
     },
     {
       title: "Je m'habille pour le travail",
@@ -166,7 +178,8 @@
       subtitle: "Règle 4",
       resume:
         "Comment obtenir dix doigts propres en 10 étapes ? Cliquez sur l'image pour visualiser la vidéo puis continuer en cliquant sur le bouton suivant",
-      imageCenter: "/media/16.10doigtspropres_doigt1-propre.png"
+      imageToSelect: "/media/16.10doigtspropres_doigt1-propre.png",
+      videoClick:"/media/16.10doigtspropres_videos.mp4",
     },
     {
       title:
@@ -277,7 +290,7 @@
         "/media/29.blessure_2sparadraps-bleu.jpg",
         "/media/29.blessure_2sparadraps-jaune.jpg"
       ],
-      correctAnswer: 0,
+      correctAnswer: "/media/29.blessure_2sparadraps-bleu.jpg",
       correctResponse: "Exact",
       incorrectResponse: "Faux"
     },
@@ -492,8 +505,7 @@
       .each(function () {
         res.push($(this).val());
       });
-    console.log("rrrrrrrrrrrr");
-    console.log(res);
+    
     e.preventDefault();
     if (quiz.is(":animated")) {
       return false;
@@ -509,8 +521,7 @@
         }
       }
     }
-    console.log(pageCounter);
-    console.log(m);
+    
   });
 
   // Click handler for the 'prev' button
@@ -570,8 +581,8 @@
         150
       );
       //createImage(questions[index].imageLeft, qElement, 150);
-      console.log("monnnnnnnn Image");
-      console.log(questions[index].imageLeft);
+      //console.log("monnnnnnnn Image");
+      //console.log(questions[index].imageLeft);
       qElement.append(des);
     }
 
@@ -672,11 +683,9 @@
     if (questions[pageCounter].imageChoices != null) {
       var question = $("<p>").append(questions[pageCounter].question);
       qElement.append(question);
-      var res = $("<p>");
+      var res = $('<div id="content"> <div id="thumb_img" class="cf">');
       questions[pageCounter].imageChoices.forEach(element => {
         res.append(
-          '<div id="content">' +
-          '<div id="thumb_img" class="cf">' +
           '<img class="active" src="' +
           element +
           '" ' +
@@ -719,11 +728,29 @@
         questions[pageCounter].imageToSelect +
         "' width='450' height='252' alt='Nutribel' usemap='#nutribelmap'>";
       image +=
-        "<map name='nutribelmap'><area shape='rect' coords='220,50,260,200' alt='nutribelVestiaire' href=''>  </map>";
+        "<map name='nutribelmap'><area shape='rect' coords='220,50,260,200' alt='nutribelVestiaire' href='"+
+        questions[pageCounter].videoClick +"'>  </map>";
 
       qElement.append(image);
     }
   }
+
+  function videoToSelect(qElement) {
+    if (questions[pageCounter].imageToSelect != null) {
+      console.log(questions[pageCounter].imageToSelect);
+      image =
+        "<img src='" +
+        questions[pageCounter].imageToSelect +
+        "' width='450' height='252' alt='Nutribel' usemap='#nutribelmap'>";
+      image +=
+        "<map name='nutribelmap'><area shape='rect' coords='220,50,260,200' alt='nutribelVestiaire' href='"+
+        questions[pageCounter].imageToSelect +"'>  </map>";
+
+      qElement.append(image);
+    }
+  }
+
+  
 
   // Creates a list of the answer choices as radio inputs
   function createRadios(index) {
@@ -831,6 +858,8 @@
       }
     }
 
+    /*
+
     if (questions[pageCounter].imageChoices != null) {
       var res = [];
       $("input[type=radio][name='answer']")
@@ -848,8 +877,8 @@
         //alert('not correct');
         M.toast({ html: questions[pageCounter].incorrectResponse });
       }
-    }
-    console.log(res);
+    }*/
+    //console.log(res);
   }
 
 
@@ -869,41 +898,38 @@
       if (pageCounter < questions.length) {
         var nextQuestion = createQuestionElement(pageCounter);
         quiz.append(nextQuestion).fadeIn();
-        console.log(pageCounter);
+        //console.log(pageCounter);
 
         //$('input[value=' + selections[pageCounter] + ']').prop('checked', true);
         if (questions[pageCounter].radioChoices != null) {
-          console.log(questions[pageCounter].radioChoices);
+          //console.log(questions[pageCounter].radioChoices);
         }
-
-        console.log(showMe);
-        console.log(pageCounter);
 
         // Controls display of 'prev' button
         if (pageCounter === 1) {
           $("#prev").show();
           $("#valid").hide();
-          console.log("ici1");
+          
         } else if (pageCounter === 0) {
           $("#prev").hide();
           $("#next").show();
           $("#valid").hide();
-          console.log("ici2");
+          
         } else if (pageCounter === 41 && showMe === 0) {
           $("#valid").show();
           $("#prev").hide();
           $("#next").hide();
-          console.log("ici3"); //supppp
+          //console.log("ici3"); //supppp
         } else if (pageCounter === 41 && showMe === 1) {
           $("#valid").hide();
           $("#prev").hide();
           $("#next").hide();
-          console.log("ici4");
+          
         } else {
           $("#valid").hide();
           $("#prev").show();
           $("#next").show();
-          console.log("ici5");
+          
         }
       }
     });

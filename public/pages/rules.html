@@ -1,5 +1,6 @@
 <!DOCTYPE html lang="en">
-  <head>
+
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -25,40 +26,53 @@
       $("#side-nav").load("/pages/side-nav.html");
     });
   </script>
-
 </head>
 
-  <body class="grey lighten-4">
-        <div id="top-nav"></div>
-        <ul id="side-menu" class="sidenav side-menu">
-          <div id="side-nav"></div>
-        </ul>
-      <div class="row">
+
+
+<body class="grey lighten-4">
+  <div id="top-nav"></div>
+  <ul id="side-menu" class="sidenav side-menu">
+    <div id="side-nav"></div>
+  </ul>
+  <div class="row">
+    <main>
+      <form name="quizForm">
+
+        <div id="quiz">
+        </div>
+        <script>
+
+          function checkImgSelected(exact, url, e) {
+            let nodes = document.getElementById("thumb_img");
+            let img_child = nodes.children;
+            for (i = 0; i < img_child.length; i++) {
+              img_child[i].classList.remove('active');
+              //console.log(img_child[i]);
+            }
+            e.classList.add('active');
+            if (e.src.includes(exact)) {
+              M.toast({ html: 'Exact' });
+            } else {
+              M.toast({ html: 'Faux' });
+            }
+          }
           
-        <main>
-            <script >
-                var current = 41;
-                </script>
 
-            <form name="quizForm">
-                <div id="quiz"></div>
-       
-        <a class="waves-effect waves-light btn" id="prev" href="#">Précédent</a>
-        <a class="waves-effect waves-light btn" id="next" href="#">Suivant</a>
-            <a class="waves-effect waves-light btn" id="valid" href="#">Revoir cette règle</a>
-            <a class="waves-effect waves-light btn" id="end" href="/index.html"
-              >Terminer</a
-            >
-          </form>
-        </main>
-      </div>
-    </div> 
+          var current = 0;
+        </script>
+        <p> </p>
 
-    <script
-      type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
-    ></script>
-    <script src="/js/rules.js"></script>
-    <script src="/js/ui.js"></script>
-  </body>
+        <a class="waves-effect waves-light btn-large" id="prev" href="#">Précédent</a>
+        <a class="waves-effect waves-light btn-large" id="next" href="#">Suivant</a>
+      </form>
+    </main>
+  </div>
+  </div>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/rules.js"></script>
+  <script src="/js/ui.js"></script>
+</body>
+
 </html>
