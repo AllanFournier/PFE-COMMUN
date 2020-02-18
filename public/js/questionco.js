@@ -252,7 +252,6 @@ function loadChoice() {
 
 function loadChoiceGroup() {
   // Create the query to load the last 12 messages and listen for new ones.
-  if (isUserSignedIn()) {
     var query = firebase.firestore().collection("group").doc("10").collection("choix");
 
     query.onSnapshot(function (snapshot) {
@@ -277,10 +276,6 @@ function loadChoiceGroup() {
       });
       updateNames();
     });
-  } else {
-    alert("Connectez vous s.v.p");
-  }
-
 }
 
 loadChoiceGroup();

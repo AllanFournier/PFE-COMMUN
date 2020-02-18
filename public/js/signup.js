@@ -12,7 +12,7 @@ signBtn.addEventListener("click", e => {
   if (email != null && password != null) {
     firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
       console.log(cred);
-      query = firebase.firestore().collection("group").doc(group);
+      query = firebase.firestore().collection("group").doc("10");
 
       query.get().then(function (doc) {
         if (doc.exists) {
