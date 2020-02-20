@@ -36,6 +36,7 @@ function getUserEmail() {
 
 // Returns true if a user is signed-in.
 function isUserSignedIn() {
+  console.log("Vérificaiton sign")
   return !!firebase.auth().currentUser;
 }
 /*
@@ -72,7 +73,6 @@ function authStateObserver(user) {
   }
 }
 */
-
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
   if (user) { // User is signed in!

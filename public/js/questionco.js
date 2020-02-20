@@ -78,6 +78,10 @@ var questions = [
   }
 ];
 
+var auth = null;
+var user = {};
+var userUID;
+var userGroup = 0;
 var questionCounter = 0;
 
 var numquestion = document.getElementById("number-question");
@@ -173,7 +177,7 @@ let choixQuestion = {
   nomC: "",
   counterC: 0,
 };
-
+/*
 function updateChoiceOld(choixU) {
 
   if (isUserSignedIn()) {
@@ -196,10 +200,12 @@ function updateChoiceOld(choixU) {
   }
 
 }
+*/
+
 function updateChoice(choixU) {
 
   if (isUserSignedIn()) {
-    var refCh = firebase.firestore().collection("group").doc("10").collection("choix").doc(firebase.auth().currentUser.uid);
+    var refCh = firebase.firestore().collection("group").doc(userGroup).collection("choix").doc(firebase.auth().currentUser.uid);
 
     return refCh.set({
       name: getUserName(),
@@ -218,7 +224,7 @@ function updateChoice(choixU) {
   }
 
 }
-
+/*
 // Loads  messages history and listens for upcoming ones.
 function loadChoice() {
   // Create the query to load the last 12 messages and listen for new ones.
@@ -248,35 +254,78 @@ function loadChoice() {
     updateNames();
   });
 
-}
+}*/
 
 function loadChoiceGroup() {
-  // Create the query to load the last 12 messages and listen for new ones.
-    var query = firebase.firestore().collection("group").doc("10").collection("choix");
-
-    query.onSnapshot(function (snapshot) {
-      snapshot.forEach(function (doc) {
-        var choixAutre = doc.data().choix;
-        console.log(choixAutre);
-        var nomAutre = doc.data().name;
-        console.log(nomAutre);
-        if (choixAutre === "C") {
-          if (!choixQuestion.nomC.includes(nomAutre))
-            choixQuestion["nomC"] += " " + nomAutre;
-          choixQuestion["counterC"] += 1;
-        } else if (choixAutre === "B") {
-          if (!choixQuestion.nomB.includes(nomAutre))
-            choixQuestion["nomB"] += " " + nomAutre;
-          choixQuestion["counterB"] += 1;
-        } else if (choixAutre === "A") {
-          if (!choixQuestion.nomA.includes(nomAutre))
-            choixQuestion["nomA"] += " " + nomAutre;
-          choixQuestion["counterA"] += 1;
-        }
+  //f5();
+  findU().then( reu => {
+    console.log(reu.uid);
+    findGroup(reu.uid).then( reu => {
+      userGroup = reu;
+      var query = firebase.firestore().collection("group").doc(userGroup).collection("choix");
+  
+      query.onSnapshot(function (snapshot) {
+        snapshot.forEach(function (doc) {
+          var choixAutre = doc.data().choix;
+          console.log(choixAutre);
+          var nomAutre = doc.data().name;
+          console.log(nomAutre);
+          if (choixAutre === "C") {
+            if (!choixQuestion.nomC.includes(nomAutre))
+              choixQuestion["nomC"] += " " + nomAutre;
+            choixQuestion["counterC"] += 1;
+          } else if (choixAutre === "B") {
+            if (!choixQuestion.nomB.includes(nomAutre))
+              choixQuestion["nomB"] += " " + nomAutre;
+            choixQuestion["counterB"] += 1;
+          } else if (choixAutre === "A") {
+            if (!choixQuestion.nomA.includes(nomAutre))
+              choixQuestion["nomA"] += " " + nomAutre;
+            choixQuestion["counterA"] += 1;
+          }
+        });
+        updateNames();
       });
-      updateNames();
+    })
+  });
+  
+}
+
+function findU(x) {
+  return new Promise((resolve, reject) => {
+    console.log("C'est fait");
+    // réussir une fois sur deux
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        resolve(user);
+      } else {
+        // No user is signed in.
+        reject("Échec");
+      }
     });
+  })
+}
+
+function findGroup(x) {
+  return new Promise(resolve => {
+    var docRef = firebase.firestore().collection("users").doc(x);
+
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
+        //console.log("Document data:", doc.data().group);
+        resolve(doc.data().group);
+      } else {
+        // doc.data() will be undefined in this case
+        resolve(0);
+        //console.log("No such document!");
+      }
+    }).catch(function (error) {
+      //console.log("Error getting document:", error);
+      resolve(0);
+    });
+
+  });
 }
 
 loadChoiceGroup();
-//loadChoice();
