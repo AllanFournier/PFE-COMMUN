@@ -41,6 +41,7 @@ signBtn.addEventListener("click", e => {
       user.updateProfile({
         displayName: firstname + " " + lastname,
       }).then(function () {
+        document.location.href ="/index.html";
         // Update successful.
       }).catch(function (error) {
         // An error happened.
